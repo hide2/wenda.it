@@ -1,0 +1,131 @@
+<div id="custom-header"></div>
+
+<div class="container">
+
+	<div id="header">
+		<div id="topbar">
+			<div id="hlinks">
+				<span id="hlinks-nav">
+					<a href="/users/login?returnurl=%2f">登录</a>
+					<span class="lsep">|</span>
+					<a href="/about">关于</a>
+					<span class="lsep">|</span>
+					<a href="/faq">FAQ</a>
+				</span>
+			</div>
+			<div id="hsearch">
+				<form id="search" action="/search" method="get">
+					<div>
+						<input name="q" class="textbox" tabindex="1" onfocus="if (this.value=='搜索') this.value = ''" onblur="if (this.value=='') this.value = '搜索'" type="text" maxlength="80" size="28" value="搜索">
+					</div>
+				</form>
+			</div>
+		</div>
+		<br class="cbt">
+		<div id="hlogo">
+			<a href="/">wenda.it</a>
+		</div>
+		<div id="hmenus">
+			<div class="nav mainnavs">
+				<ul>
+					<li><a id="nav-questions" href="/questions">问题</a></li>
+					<li><a id="nav-tags" href="/tags">标签</a></li>
+					<li><a id="nav-users" href="/users">用户</a></li>
+					<li><a id="nav-badges" href="/badges">徽章</a></li>
+					<li><a id="nav-unanswered" href="/unanswered">待解决问题</a></li>
+				</ul>
+			</div>
+			<div class="nav askquestion">
+				<ul>
+					<li>
+						<a id="nav-askquestion" href="/questions/ask">我要提问</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div id="content">
+	
+		<div id="mainbar">
+			<div class="subheader">
+				<h1 id="h-top-questions">热点问题</h1>
+			</div>
+			<div id="question-mini-list">
+				
+				<% @questions.each do |q| %>
+				<div class="question-summary narrow" id="question-summary-<%=q.id%>">
+					<div onclick="window.location.href='/questions/<%=q.id%>/datepicker-shows-wrong-value-of-month'" class="cp">
+						<div class="votes">
+							<div class="mini-counts">1</div>
+							<div>顶</div>
+						</div>
+						<div class="status answered">
+							<div class="mini-counts">2</div>
+				
+							<div>回答</div>
+						</div>
+						<div class="views">
+							<div class="mini-counts">6</div>
+							<div>查看</div>
+						</div>
+					</div>
+					<div class="summary">
+						<h3><a href="/questions/<%=q.id%>/datepicker-shows-wrong-value-of-month" class="question-hyperlink" title="<%=q.content%>"><%=q.title%></a></h3>
+						
+						<div class="tags t-android">
+							<a href="/questions/tagged/android" class="post-tag" title="show questions tagged 'android'" rel="tag"><img src="http://sstatic.net/stackoverflow/img/tag-android.png" height="16" width="18" alt="" class="sponsor-tag-img">android</a> 
+						</div>
+						<div class="started">
+							<span class="relativetime">3m ago</span>
+							<a href="/users/544198/pearsonartphoto" >Pearsonartphoto</a> <span class="reputation-score" title="reputation score">66</span>
+						</div>
+					</div>
+				</div>
+				<% end %>
+			</div>
+			<h2 class="bottom-notice">想查看更多问题？你可以浏览<a href="/questions">完整问题列表</a>，或者<a href="/tags">最热标签</a>。帮助回答<a href="/unanswered">待解决问题</a>，赢得<a href="/badges">徽章</a>。</h2>
+		</div>
+
+		<div id="sidebar">
+			<div class="module" id="recent-tags">
+				<h4 id="h-recent-tags">最近标签</h4>
+				<div id="recent-tags-list">
+					<a href="/questions/tagged/windows-phone-7" class="post-tag" title="show questions tagged 'windows-phone-7'" rel="tag"><img src="http://sstatic.net/stackoverflow/img/tag-microsoft-phone.png" height="16" width="18" alt="" class="sponsor-tag-img">windows-phone-7</a><span class="item-multiplier">&times;&nbsp;4</span><br>
+					<a href="/questions/tagged/bing-maps" class="post-tag" title="show questions tagged 'bing-maps'" rel="tag">bing-maps</a><span class="item-multiplier">&times;&nbsp;2</span><br>
+					<a href="/questions/tagged/database" class="post-tag" title="show questions tagged 'database'" rel="tag">database</a><span class="item-multiplier">&times;&nbsp;20</span><br>
+					<a href="/questions/tagged/mobile" class="post-tag" title="show questions tagged 'mobile'" rel="tag">mobile</a><span class="item-multiplier">&times;&nbsp;2</span><br>
+					<a href="/questions/tagged/android" class="post-tag" title="show questions tagged 'android'" rel="tag"><img src="http://sstatic.net/stackoverflow/img/tag-android.png" height="16" width="18" alt="" class="sponsor-tag-img">android</a><span class="item-multiplier">&times;&nbsp;50</span><br>
+				</div>
+				<p class="ar"><a href="/tags">所有标签 &raquo;</a></p>
+			</div>  
+			<div class="module" id="recent-badges">
+				<h4 id="h-recent-badges">最近徽章</h4>
+				<table>
+					<tr><td>
+						<a href="/badges/24/good-answer?userid=199245" title="silver badge: Answer score of 25 or more" class="badge"><span class="badge2"></span>&nbsp;Good Answer</a>
+				 		<a href="/users/199245/ray-burns" >Ray Burns</a>
+				 	</td></tr>
+					<tr><td>
+						<a href="/badges/12/strunk-white?userid=154152" title="silver badge: Edited 100 entries" class="badge"><span class="badge2"></span>&nbsp;Strunk &amp; White</a>
+				 		<a href="/users/154152/noon-silk" >Noon Silk</a>
+				 	</td></tr>
+					<tr><td>
+						<a href="/badges/805/sportsmanship?userid=220819" title="silver badge: Up voted 100 competing answers" class="badge"><span class="badge2"></span>&nbsp;Sportsmanship</a>
+				 		<a href="/users/220819/jacob-relkin" >Jacob Relkin</a>
+				 	</td></tr>
+				</table>
+				<p class="ar"><a href="/badges">所有徽章 &raquo;</a></p>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<div id="footer">
+	<div class="footerwrap">
+		<div id="copyright">
+			&copy; 2011 wenda.it
+		</div>
+	</div>
+</div>
