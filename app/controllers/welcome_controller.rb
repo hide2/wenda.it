@@ -1,6 +1,7 @@
 class WelcomeController < ApplicationController
   
   def index
-    @questions = Question.latest
+    @questions = Question.hot
   end
+
 end

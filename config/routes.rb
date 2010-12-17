@@ -3,6 +3,11 @@ WendaIt::Application.routes.draw do
   root :to => "welcome#index"
   
   resources :questions
+  resources :tags
+  resources :users
+  resources :badges
+  
+  match 'unanswered' => 'questions#unanswered'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

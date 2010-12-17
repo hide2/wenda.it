@@ -6,4 +6,5 @@ class User
   
   many :questions
   many :answers
+  many :badges
 end

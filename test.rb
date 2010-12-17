@@ -9,4 +9,6 @@ end
   q.title = t.to_s + ". 测试<script>alert(123);</script>"
   q.content = "如题如题如题如题如题如题如题如题<script>alert(123);</script>"
   q.save
+  p q
+  p "---------------------------------------------------"
 end

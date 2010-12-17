@@ -1,0 +1,42 @@
+<div id="header">
+	<div id="topbar">
+		<div id="hlinks">
+			<span id="hlinks-nav">
+				<a href="/users/login?returnurl=%2f">登录</a>
+				<span class="lsep">|</span>
+				<a href="/about">关于</a>
+				<span class="lsep">|</span>
+				<a href="/faq">FAQ</a>
+			</span>
+		</div>
+		<div id="hsearch">
+			<form id="search" action="/search" method="get">
+				<div>
+					<input name="q" class="textbox" tabindex="1" onfocus="if (this.value=='搜索') this.value = ''" onblur="if (this.value=='') this.value = '搜索'" type="text" maxlength="80" size="28" value="搜索">
+				</div>
+			</form>
+		</div>
+	</div>
+	<br class="cbt">
+	<div style="height: 35px; margin-top: 35px;" id="hlogo">
+		<a href="/" style="text-decoration: none;"><span style="font-size: 35px; color: grey; font-family: courier;">wenda.</span><span style="font-size: 40px; color: green; font-weight: bold; font-family: courier;">it</span></a>
+	</div>
+	<div id="hmenus">
+		<div class="nav mainnavs">
+			<ul>
+				<li class="<%= @youareat == 'questions' ? 'youarehere' : '' %>"><a id="nav-questions" href="/questions">问题</a></li>
+				<li class="<%= @youareat == 'tags' ? 'youarehere' : '' %>"><a id="nav-tags" href="/tags">标签</a></li>
+				<li class="<%= @youareat == 'users' ? 'youarehere' : '' %>"><a id="nav-users" href="/users">用户</a></li>
+				<li class="<%= @youareat == 'badges' ? 'youarehere' : '' %>"><a id="nav-badges" href="/badges">徽章</a></li>
+				<li class="<%= @youareat == 'unanswered' ? 'youarehere' : '' %>"><a id="nav-unanswered" href="/unanswered">待解决问题</a></li>
+			</ul>
+		</div>
+		<div class="nav askquestion">
+			<ul>
+				<li class="<%= @youareat == 'new_question' ? 'youarehere' : '' %>">
+					<%= link_to '我要提问', new_question_path %>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

@@ -8,7 +8,14 @@
 	</head>
 <body>
 
-<%= yield %>
+<div id="custom-header"></div>
+<div class="container">
+	<%= render :partial => "share/header" %>
+	<div id="content">
+		<%= yield %>
+	</div>
+</div>
+<%= render :partial => "share/footer" %>
 
 </body>
 </html>
