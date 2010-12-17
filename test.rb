@@ -1,6 +1,12 @@
 require File.dirname(__FILE__)+'/config/environment'
 
-q = Question.new
-q.title = "测试中文，呵呵asdfqw&（*￥&（#￥*'''@￥@#（asdfadslf<script>alert(123);</script>!!!"
-q.content = "如题如题如题如题如题如题如题如题asdfqw&（*￥&（'''#￥*@￥@#（asdfadslf<script>alert(123);</script>!!!"
-q.save
+Question.all.each do |q|
+  q.destroy
+end
+
+(1..20).each do |t|
+  q = Question.new
+  q.title = t.to_s + ". 测试<script>alert(123);</script>"
+  q.content = "如题如题如题如题如题如题如题如题<script>alert(123);</script>"
+  q.save
+end
