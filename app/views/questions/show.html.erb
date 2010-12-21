@@ -1,0 +1,122 @@
+<div id="question-header">
+	<h1>
+		<a href="/questions/<%=@question.id%>" class="question-hyperlink"><%=@question.title%></a>
+	</h1>
+</div>
+
+<div id="mainbar">
+	<div id="question">
+		<table>
+			<tr>
+				<td class="votecell">
+					<div class="vote">
+						<input type="hidden" value="4491461">
+						<a title="This question is useful and clear (click again to undo)" class="vote-up-off">up vote</a>
+						<span class="vote-count-post">0</span>
+						<a title="This question is unclear or not useful (click again to undo)" class="vote-down-off">down vote</a>
+						<a title="This is a favorite question (click again to undo)" class="star-off">favorite</a>
+						<div class="favoritecount"><b></b></div>
+					</div>
+				</td>
+				<td class="postcell">
+					<div>
+						<div class="post-text">
+							<%= raw blacklist RDiscount.new(@question.content).to_html %>
+						</div>
+						<div class="post-taglist">
+							<% @question.tags.each do |t| %>
+							<a rel="tag" title="查看含有标签 '<%=t['name']%>' 的问题" class="post-tag" href="/questions/tagged/<%=t['name']%>"><%=t['name']%></a> 
+							<% end %>
+						</div>
+						<table class="fw">
+							<tr>
+								<td class="vt">
+									<div class="post-menu"><%= link_to '修改', edit_question_path(@question), :title=>"修改或补充此问题" %></div>
+								</td>
+								<td class="post-signature owner">
+									<div class="user-info"><div class="user-action-time">于 <span class="relativetime" title="<%= s @question.created_at%>"><%=time_ago_in_words(@question.created_at)%></span></div><div class="user-gravatar32"><a href="/users/<%=@question.user.id%>"><img width="32" height="32" alt="" src="http://www.gravatar.com/avatar/6d8949b6138dec9247dc42eb7b3d7525?s=32&amp;d=identicon&amp;r=PG"></a></div><div class="user-details"><a href="/users/<%=@question.user.id%>"><%=@question.user.name%></a><br><span title="reputation score" class="reputation-score">10</span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span></div></div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="votecell"></td>
+				<td>
+					<div class="comments dno" id="comments-4491461">
+						<table>
+							<tr><td></td><td></td></tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!-- 
+	<div id="answers">
+		<a name="tab-top"></a>
+		<div id="answers-header">
+			<div class="subheader answers-subheader">
+				<h2></h2>
+				<div id="tabs">
+				</div>
+			</div>
+		</div>
+	
+		<form method="post" action="" id="post-form">
+			<h2 class="space">回答</h2>
+			<div id="post-editor">
+				<div id="wmd-container">
+					<textarea tabindex="101" rows="15" cols="92" name="post-text" id="wmd-input" class="processed"></textarea>
+				</div>
+			</div>
+			<div class="form-item">
+				<table>
+					<tr>
+						<td class="vm open-id-login">
+							<a href="/users/login?returnurl=%2fquestions%2f4491461%2fsatchmo-reportlab-unicode-decode-error" style="font-size: 200%; margin-left: 30px;" id="login-link">log in</a>
+						</td>
+						<td class="orcell">
+							<div class="orword">or</div>
+							<div class="orline"></div>
+						</td>
+						<td class="vm">
+							<div>
+								<label for="display-name">Name</label>
+								<input type="text" tabindex="105" value="foo" maxlength="30" size="30" name="display-name" id="display-name">
+							</div>
+							<div>
+								<label for="m-address">Email</label>
+								<input type="text" tabindex="106" value="foo3@bar4.com" maxlength="100" size="40" name="m-address" id="m-address">
+								<span class="edit-field-overlay">never shown</span>
+							</div>
+							<div>
+								<label for="home-page">Home Page</label>
+								<input type="text" tabindex="107" value="" maxlength="200" size="40" name="home-page" id="home-page">
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="form-submit cbt"><input type="submit" tabindex="110" value="Post Your Answer" id="submit-button"></div>
+		</form>
+		
+		<h2 class="bottom-notice">
+			Know someone who can answer? 
+			Share a <a href="/q/4491461/546119">link</a> to this question via 
+			<a href="mailto:?subject=Stack%20Overflow%20Question&amp;body=Satchmo%2c%20Reportlab%20Unicode%20Decode%20Error%20%0Ahttp%3a%2f%2fstackoverflow.com%2fq%2f4491461%2f546119">email</a>, 
+			<a href="http://twitter.com/share?url=http%3a%2f%2fstackoverflow.com%2fq%2f4491461%2f546119&amp;text=Satchmo%2c%20Reportlab%20Unicode%20Decode%20Error%20">twitter</a>, or 
+			<a href="http://www.facebook.com/sharer.php?u=http%3a%2f%2fstackoverflow.com%2fq%2f4491461%2f546119&amp;t=Satchmo%2c%20Reportlab%20Unicode%20Decode%20Error%20">facebook</a>.
+		</h2>
+	
+		<h2 class="bottom-notice">
+			Browse other questions tagged <a rel="tag" title="show questions tagged 'python'" class="post-tag" href="/questions/tagged/python">python</a> <a rel="tag" title="show questions tagged 'django'" class="post-tag" href="/questions/tagged/django">django</a> <a rel="tag" title="show questions tagged 'unicode'" class="post-tag" href="/questions/tagged/unicode">unicode</a> <a rel="tag" title="show questions tagged 'decode'" class="post-tag" href="/questions/tagged/decode">decode</a> <a rel="tag" title="show questions tagged 'satchmo'" class="post-tag" href="/questions/tagged/satchmo">satchmo</a> 
+			or <a href="/questions/ask">ask your own question</a>.
+		</h2>
+	</div>
+	 -->
+</div>
+
+<div id="sidebar">
+</div>

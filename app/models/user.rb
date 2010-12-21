@@ -1,8 +1,8 @@
 class User
   include MongoMapper::Document
 
-  key :name,  String
-  key :email, String
+  key :name,  String, :required => true
+  key :email, String, :required => true
   
   many :questions
   many :answers

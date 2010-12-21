@@ -8,6 +8,8 @@ WendaIt::Application.routes.draw do
   resources :badges
   
   match 'unanswered' => 'questions#unanswered'
+  match 'questions/preview' => 'questions#preview'
+  match 'questions/tagged/:tag' => 'questions#tagged'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
