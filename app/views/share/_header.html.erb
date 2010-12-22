@@ -2,11 +2,17 @@
 	<div id="topbar">
 		<div id="hlinks">
 			<span id="hlinks-nav">
+				<% if !login? %>
 				<a href="/users/login?returnurl=%2f">登录</a>
+				<% else %>
+				<a href="/users/<%=login_user.id%>"><%=login_user.name%></a>
+				<% end %>
 				<span class="lsep">|</span>
+				<% if login? && login_user.password.blank? %>
+				<a href="/users/signup?returnurl=%2f">注册</a>
+				<span class="lsep">|</span>
+				<% end %>
 				<a href="/about">关于</a>
-				<span class="lsep">|</span>
-				<a href="/faq">FAQ</a>
 			</span>
 		</div>
 		<div id="hsearch">

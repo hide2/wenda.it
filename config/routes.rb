@@ -3,6 +3,7 @@ WendaIt::Application.routes.draw do
   root :to => "welcome#index"
   
   resources :questions
+  resources :answers
   resources :tags
   resources :users
   resources :badges

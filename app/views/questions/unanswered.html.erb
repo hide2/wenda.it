@@ -1,9 +1,8 @@
 <div id="mainbar">
 	<div class="subheader">
-		<h1 id="h-top-questions">所有问题</h1>
+		<h1 id="h-top-questions">待解决问题</h1>
 	</div>
 	<div id="question-mini-list">
-		
 		<% @questions.each do |q| %>
 		<div class="question-summary narrow" id="question-summary-<%=q.id%>">
 			<div onclick="window.location.href='/questions/<%=q.id%>'" class="cp">

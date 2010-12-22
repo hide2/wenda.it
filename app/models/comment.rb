@@ -1,4 +1,4 @@
-class Answer
+class Comment
   include MongoMapper::Document
 
   key :content,     String
@@ -7,7 +7,5 @@ class Answer
   key :question_id, ObjectId
   timestamps!
   
-  belongs_to :user
-  belongs_to :question
-  many :comments
+  belongs_to :answer
 end

@@ -18,7 +18,7 @@ $(document).ready(function() {
 				<label for="title">标题</label>
 			</td>
 			<td class="ask-title-cell-value">
-				<%= f.text_field :title, :class=>"ask-title-field", :tabindex=>"100", :maxlength=>"300" %>
+				<%= f.text_field :title, :class=>"ask-title-field", :tabindex=>"100", :maxlength=>"50" %>
 			</td>
 		</tr>
 	</table>
@@ -32,9 +32,10 @@ $(document).ready(function() {
 
 <div class="form-item">
 	<label>标签</label>
-	<input type="text" onfocus="if (this.value=='请使用空格分隔多个标签') this.value = ''" onblur="if (this.value=='') this.value = '请使用空格分隔多个标签'" tabindex="103" value="<%=@question.new? ? '请使用空格分隔多个标签' : @question.tags.map{|t|t.values[0]}.join(' ')%>" size="60" name="tags" id="tags" class="edit-field-overlayed ac_input" autocomplete="off">		
+	<input type="text" onfocus="if (this.value=='请使用空格分隔多个标签') this.value = ''" onblur="if (this.value=='') this.value = '请使用空格分隔多个标签'" tabindex="103" value="<%= @errors ? @question.tags : (@question.new? ? '请使用空格分隔多个标签' : @question.tags.map{|t|t.values[0]}.join(' ')) %>" size="60" maxlength="60" name="tags" id="tags" class="edit-field-overlayed ac_input" autocomplete="off">		
 </div>
-<% if @question.new? %>
+
+<% if @question.new? && !login? %>
 <div class="form-item">
 	<table>
 		<tr>
@@ -48,28 +49,23 @@ $(document).ready(function() {
 			<td class="vm">
 				<div>
 					<label for="display-name">用户名</label>
-					<input type="text" tabindex="105" value="" maxlength="30" size="30" name="username" id="username">
+					<input type="text" tabindex="105" value="<%=@user ? @user.name : ''%>" maxlength="20" size="30" name="username" id="username">
 				</div>
 				<div>
 					<label for="email">Email</label>
-					<input type="text" tabindex="106" value="" maxlength="100" size="40" name="email" id="email">
+					<input type="text" tabindex="106" value="<%=@user ? @user.email : ''%>" maxlength="50" size="40" name="email" id="email">
 				</div>
 			</td>
 		</tr>
 	</table>
 </div>
 <% end %>
-<!-- 	
-<div id="notify-options">
-	<h2>
-		<input type="checkbox" name="notify-email" id="notify-email"> Notify 
-		<input type="text" value="foo3@bar4.com" disabled="" name="notify-email-address" id="notify-email-address"> daily of any new answers
-	</h2>
-</div>
- -->
 
 <div class="form-error">
 	<% if @errors %>
+	<script>
+		$().ready(function() {window.scrollBy(0,100000);});
+	</script>
 	<p>咦？出错了:</p>
 	<ul>
 		<% @errors.each do |e| %>

@@ -1,14 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  before_filter :set_charset
-  before_filter :configure_charsets
+  helper_method :login?, :login_user
+    
+  def login?
+    session[:user_id]
+  end
   
-  def set_charset
-    headers["Content-Type"] = "text/html; charset=utf-8"
+  def login_user
+    User.find session[:user_id]
   end
-
-  def configure_charsets
-    response.headers["Content-Type"] = "text/html; charset=utf-8"
-  end
+  
 end

@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
 
-  before_filter :validate_create_question, :only => [:create, :update]
+  before_filter :validate_question, :only => [:create, :update]
   
   def index
     @questions = Question.paginate(params[:page] || 1)
@@ -22,6 +22,9 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @question.views_count += 1
     @question.save
+    if !@question.has_final_answer?
+      @answer = Answer.new
+    end
     @youareat = "questions"
   end
   
@@ -41,17 +44,20 @@ class QuestionsController < ApplicationController
   end
   
   def create
-    @user = User.new
-    @user.name = params[:username]
-    @user.email = params[:email]
-    @user.save
     @question = Question.new
-    @question.title = params[:question][:title]
+    @question.title = params[:question][:title].strip
     @question.content = params[:question][:content]
-    @question.user = @user
-    @question.save_tags(params[:tags])
-    if @question.save
-      redirect_to(@question, :notice => '问题已经成功发布！')
+    @question.tags = params[:tags].strip
+    p @question
+    if @errors.empty?
+      if !login?
+        @user.save
+        session[:user_id] = @user.id
+      end
+      @question.user = @user
+      @question.save_tags(params[:tags])
+      @question.save
+      redirect_to @question
     else
       render :action => "new"
     end
@@ -59,12 +65,13 @@ class QuestionsController < ApplicationController
   
   def update
     @question = Question.find(params[:id])
-    @question.title = params[:question][:title]
+    @question.title = params[:question][:title].strip
     @question.content = params[:question][:content]
-    @question.save_tags(params[:tags])
+    @question.tags = params[:tags].strip
     if @errors.empty?
+      @question.save_tags(params[:tags])
       @question.save
-      redirect_to(@question, :notice => '问题已经成功更新！')
+      redirect_to @question
     else
       @question.content = @question.content
       render :action => "edit"
@@ -74,22 +81,43 @@ class QuestionsController < ApplicationController
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
-    redirect_to(questions_url)
+    redirect_to questions_url
   end
   
   private
   
-    def validate_create_question
+    def validate_question
       params[:tags].gsub!("请使用空格分隔多个标签", "")
       @errors = []
       if params[:question][:title].size <= 10
-        @errors << "问题标题不能短于10个字符"
+        @errors << "标题不能短于10个字符"
       end
       if params[:question][:content].size <= 30
-        @errors << "问题内容不能短于30个字符"
+        @errors << "内容不能短于30个字符"
       end
       if params[:tags].blank?
-        @errors << "问题至少需要一个标签"
+        @errors << "至少需要一个标签"
+      end
+      if login?
+        @user = login_user
+      else
+        @user = User.new
+        @user.name = params[:username].strip
+        @user.email = params[:email].strip
+        if @user.name.blank?
+          @errors << "用户名不能为空"
+        end
+        if User.find_by_name(@user.name)
+          @errors << "该用户名已经被占用"
+        end
+        if @user.email.blank?
+          @errors << "Email不能为空"
+        elsif !(/^[a-zA-Z0-9_\.]+@[a-zA-Z0-9-]+[\.a-zA-Z]+$/ =~ @user.email)
+          @errors << "Email格式不正确"
+        end
+        if User.find_by_email(@user.email)
+          @errors << "该Email已经被占用"
+        end
       end
     end
   
