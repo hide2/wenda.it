@@ -104,16 +104,6 @@ function best_answer(aid, is_best_answer) {
 					</div>
 				</td>
 			</tr>
-			<tr>
-				<td class="votecell"></td>
-				<td>
-					<div class="comments dno" id="comments-4491461">
-						<table>
-							<tr><td></td><td></td></tr>
-						</table>
-					</div>
-				</td>
-			</tr>
 		</table>
 	</div>
 
@@ -125,7 +115,9 @@ function best_answer(aid, is_best_answer) {
 			</div>
 		</div>
 		
-		<% @question.answers.each do |a| %>
+		<!-- show best answer on the top -->
+		<% if @question.has_best_answer?
+			a = @question.best_answer %>
 		<div class="answer">
 			<table>
 				<tr>
@@ -135,19 +127,10 @@ function best_answer(aid, is_best_answer) {
 							<span class="vote-count-post" id="answer_<%=a.id%>_votes"><%=a.votes_count%></span>
 							<a class="vote-down-off" title="踩" onclick="vote('a', '<%=a.id%>', '0')">down vote</a>
 							<% if login? && login_user.id == @question.user_id %>
-								<% if @question.best_answer_id != a.id %>
-								<span id="answer_accept_<%=a.id%>" class="vote-accepted-off" title="点此确认为最佳答案" onclick="best_answer('<%=a.id%>', '1')">accept</span>
-								<span id="answer_unaccept_<%=a.id%>" class="vote-accepted-on" style="display:none" title="点此取消为最佳答案" onclick="best_answer('<%=a.id%>', '0')">accepted</span>
-								<% else %>
-								<span id="answer_accept_<%=a.id%>" class="vote-accepted-off" style="display:none" title="点此确认为最佳答案" onclick="best_answer('<%=a.id%>', '1')">accept</span>
-								<span id="answer_unaccept_<%=a.id%>" class="vote-accepted-on" title="点此取消为最佳答案" onclick="best_answer('<%=a.id%>', '0')">accepted</span>
-								<% end %>
+								<span id="answer_accept_<%=a.id%>" class="vote-accepted-off" style="display:none" title="点此设置为最佳答案" onclick="best_answer('<%=a.id%>', '1')">accept</span>
+								<span id="answer_unaccept_<%=a.id%>" class="vote-accepted-on" title="点此取消最佳答案" onclick="best_answer('<%=a.id%>', '0')">accepted</span>
 							<% else %>
-								<% if @question.best_answer_id != a.id %>
-								<span id="answer_accept_<%=a.id%>" class="vote-accepted-off" style="cursor: text" title="非最佳答案">accept</span>
-								<% else %>
 								<span id="answer_unaccept_<%=a.id%>" class="vote-accepted-on" style="cursor: text" title="最佳答案">accepted</span>
-								<% end %>
 							<% end %>
 						</div>
 					</td>
@@ -181,18 +164,60 @@ function best_answer(aid, is_best_answer) {
 						</table>
 					</td>
 				</tr>
+			</table>
+		</div>
+		<% end %>
+		
+		<!-- show other answers below -->
+		<% @question.answers.each do |a| %>
+		<% 	if @question.best_answer_id != a.id %>
+		<div class="answer">
+			<table>
 				<tr>
-					<td class="votecell"></td>
-					<td>
-						<div id="comments-4511836" class="comments dno">
-							<table>
-								<tr><td></td><td></td></tr>
-							</table>
+					<td class="votecell">
+						<div class="vote">
+							<a class="vote-up-off" title="顶" onclick="vote('a', '<%=a.id%>', '1')">up vote</a>
+							<span class="vote-count-post" id="answer_<%=a.id%>_votes"><%=a.votes_count%></span>
+							<a class="vote-down-off" title="踩" onclick="vote('a', '<%=a.id%>', '0')">down vote</a>
+							<% if login? && login_user.id == @question.user_id %>
+								<span id="answer_accept_<%=a.id%>" class="vote-accepted-off" title="点此设置为最佳答案" onclick="best_answer('<%=a.id%>', '1')">accept</span>
+								<span id="answer_unaccept_<%=a.id%>" class="vote-accepted-on" style="display:none" title="点此取消最佳答案" onclick="best_answer('<%=a.id%>', '0')">accepted</span>
+							<% end %>
 						</div>
+					</td>
+					<td>
+						<div class="post-text">
+							<%= raw blacklist RDiscount.new(a.content).to_html %>
+						</div>
+						<table class="fw">
+							<tr>
+								<td class="vt">
+									<div class="post-menu"></div>
+								</td>
+								<td align="right" class="post-signature">
+									<div class="user-info">
+										<div class="user-action-time">
+											于 <span class="relativetime" title="<%= s a.created_at%>"><%=time_ago_in_words(a.created_at)%></span>
+										</div>
+										<div class="user-gravatar32">
+											<a href="/users/<%=a.user.id%>">
+												<img width="32" height="32" alt="" src="<%=a.user.avatar_path || '/images/avatar.jpg'%>">
+											</a>
+										</div>
+										<div class="user-details">
+											<a href="/users/<%=a.user.id%>"><%=a.user.name%></a><br>
+											<span title="reputation score" class="reputation-score">10</span>
+											<span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</table>
 					</td>
 				</tr>
 			</table>
 		</div>
+		<%	end %>
 		<% end %>
 		
 		<% if !(login? && login_user.id == @question.user_id) %>
