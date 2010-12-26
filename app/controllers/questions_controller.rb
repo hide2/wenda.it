@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @question.views_count += 1
     @question.save
-    if !@question.has_final_answer?
+    if !@question.has_best_answer?
       @answer = Answer.new
     end
     @youareat = "questions"
@@ -30,9 +30,9 @@ class QuestionsController < ApplicationController
   
   def vote
     @question = Question.find(params[:id])
-    if params[:delta] == 'up'
+    if params[:is_vote_up] == '1'
       @question.votes_count += 1
-    elsif params[:delta] == 'down'
+    elsif params[:is_vote_up] == '0'
       @question.votes_count -= 1
     end
     @question.save

@@ -7,14 +7,39 @@
 $(document).ready(function() {
 	$('#post-editor textarea').markItUp(mySettings);
 });
-function vote(type, id, delta) {
+function vote(type, id, is_vote_up) {
 	if(type == 'q') {
-		$.post('/questions/' + id + '/vote', {delta: delta}, function(data){
+		$.post('/questions/' + id + '/vote', {is_vote_up: is_vote_up}, function(data){
 			$('#question_' + id + '_votes').html(data);
 		});
 	} else if(type == 'a') {
-		$.post('/answers/' + id + '/vote', {delta: delta}, function(data){
+		$.post('/answers/' + id + '/vote', {is_vote_up: is_vote_up}, function(data){
 			$('#answer_' + id + '_votes').html(data);
+		});
+	}
+}
+function best_answer(aid, is_best_answer) {
+	if(is_best_answer == '1') {
+		$.post('/answers/' + aid + '/best_answer', {is_best_answer: is_best_answer}, function(data) {
+			if(data == 'success') {
+				$('#answers .vote-accepted-on').each(function() {
+					$(this).prev().show();
+					$(this).hide();
+				});
+				$('#answer_accept_' + aid).hide();
+				$('#answer_unaccept_' + aid).show();
+			} else {
+				alert('咦，出错了？请稍后重试。');
+			}
+		});
+	} else {
+		$.post('/answers/' + aid + '/best_answer', {is_best_answer: is_best_answer}, function(data) {
+			if(data == 'success') {
+				$('#answer_accept_' + aid).show();
+				$('#answer_unaccept_' + aid).hide();
+			} else {
+				alert('咦，出错了？请稍后重试。');
+			}
 		});
 	}
 }
@@ -33,9 +58,9 @@ function vote(type, id, delta) {
 			<tr>
 				<td class="votecell">
 					<div class="vote">
-						<a title="顶" class="vote-up-off" onclick="vote('q', '<%=@question.id%>', 'up')">up vote</a>
+						<a title="顶" class="vote-up-off" onclick="vote('q', '<%=@question.id%>', '1')">up vote</a>
 						<span class="vote-count-post" id="question_<%=@question.id%>_votes"><%=@question.votes_count%></span>
-						<a title="踩" class="vote-down-off" onclick="vote('q', '<%=@question.id%>', 'down')">down vote</a>
+						<a title="踩" class="vote-down-off" onclick="vote('q', '<%=@question.id%>', '0')">down vote</a>
 					</div>
 				</td>
 				<td class="postcell">
@@ -106,9 +131,18 @@ function vote(type, id, delta) {
 				<tr>
 					<td class="votecell">
 						<div class="vote">
-							<a class="vote-up-off" title="顶" onclick="vote('a', '<%=a.id%>', 'up')">up vote</a>
+							<a class="vote-up-off" title="顶" onclick="vote('a', '<%=a.id%>', '1')">up vote</a>
 							<span class="vote-count-post" id="answer_<%=a.id%>_votes"><%=a.votes_count%></span>
-							<a class="vote-down-off" title="踩" onclick="vote('a', '<%=a.id%>', 'down')">down vote</a>
+							<a class="vote-down-off" title="踩" onclick="vote('a', '<%=a.id%>', '0')">down vote</a>
+							<% if login? && login_user.id == @question.user_id %>
+								<% if @question.best_answer_id != a.id %>
+								<span id="answer_accept_<%=a.id%>" class="vote-accepted-off" title="点此确认为最佳答案" onclick="best_answer('<%=a.id%>', '1')">accept</span>
+								<span id="answer_unaccept_<%=a.id%>" class="vote-accepted-on" style="display:none" title="点此取消为最佳答案" onclick="best_answer('<%=a.id%>', '0')">accepted</span>
+								<% else %>
+								<span id="answer_accept_<%=a.id%>" class="vote-accepted-off" style="display:none" title="点此确认为最佳答案" onclick="best_answer('<%=a.id%>', '1')">accept</span>
+								<span id="answer_unaccept_<%=a.id%>" class="vote-accepted-on" title="点此取消为最佳答案" onclick="best_answer('<%=a.id%>', '0')">accepted</span>
+								<% end %>
+							<% end %>
 						</div>
 					</td>
 					<td>

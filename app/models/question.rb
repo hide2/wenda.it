@@ -7,7 +7,7 @@ class Question
   key :answers_count,   Integer, :default => 0
   key :views_count,     Integer, :default => 0
   key :user_id,         ObjectId
-  key :final_answer_id, ObjectId
+  key :best_answer_id,  ObjectId
   key :tags,          Array
   # tags in ruby: [{"id" => "4d1033f698d1b102cb00000a", "name" => "ruby"}, {"id" => "4d1033f698d1b102cb00000b", "name" =>"rails"}]
   # tags in bson: [{"id" : "4d1033f698d1b102cb00000a", "name" : "ruby"}, {"id" => "4d1033f698d1b102cb00000b", "name" : "rails"}]
@@ -52,7 +52,11 @@ class Question
     return false
   end
   
-  def has_final_answer?
-    !self.final_answer_id.nil?
+  def has_best_answer?
+    !self.best_answer_id.nil?
+  end
+  
+  def best_answer
+    Answer.find(best_answer_id)
   end
 end

@@ -10,6 +10,7 @@ WendaIt::Application.routes.draw do
   resources :answers do
     member do
       post 'vote'
+      post 'best_answer'
     end
   end
   resources :tags

@@ -28,13 +28,25 @@ class AnswersController < ApplicationController
   
   def vote
     @answer = Answer.find(params[:id])
-    if params[:delta] == 'up'
+    if params[:is_vote_up] == '1'
       @answer.votes_count += 1
-    elsif params[:delta] == 'down'
+    elsif params[:is_vote_up] == '0'
       @answer.votes_count -= 1
     end
     @answer.save
     render :text => @answer.votes_count
+  end
+  
+  def best_answer
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
+    if params[:is_best_answer] == '1'
+      @question.best_answer_id = @answer.id
+    elsif params[:is_best_answer] == '0'
+      @question.best_answer_id = nil
+    end
+    @question.save
+    render :text => 'success'
   end
   
   private
