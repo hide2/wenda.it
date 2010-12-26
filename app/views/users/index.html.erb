@@ -1,0 +1,75 @@
+<%=javascript_include_tag 'jquery.typewatch' %>
+
+<script>
+$(function() { 
+    $("#userfilter").focus().typeWatch({ highlight:true, wait:500, captureLength: -1, callback: finished });
+});
+
+function finished(keyword) {
+	$.get('/users/search', {keyword: keyword}, function(data){
+		$("#user-browser").html(data);
+        $(".pager").hide();
+	});
+}
+
+</script>
+
+<div id="mainbar-full">
+	<div class="subheader">
+		<h1 id="h-users">用户</h1>
+	</div>
+	<div class="page-description">
+		<table>
+			<tr>
+				<td>查找用户:</td>
+				<td style="padding-left: 5px;"><input type="text" name="userfilter" id="userfilter"></td>			
+			</tr>
+		</table>
+	</div>
+	<div id="user-browser">
+		<table>
+			<tr>
+				<% users = @users.clone %>
+				<% (1..5).each do |tds| %>
+				<td>
+					<% (1..7).each do |i| %>
+					<% if(u = users.shift) %>
+					<div class="user-info">
+						<div class="user-gravatar32">
+							<a href="/users/<%=u.id%>">
+								<img width="32" height="32" alt="" src="<%=u.avatar_path || '/images/avatar.jpg'%>">
+							</a>
+						</div>
+						<div class="user-details">
+							<a href="/users/<%=u.id%>"><%=u.name%></a><br>
+							<span title="reputation score" class="reputation-score">9,656</span>
+							<span title="16 silver badges">
+								<span class="badge2"></span>
+								<span class="badgecount">16</span>
+							</span>
+							<span title="46 bronze badges">
+								<span class="badge3"></span>
+								<span class="badgecount">46</span>
+							</span>
+						</div>
+					</div>
+					<% end %>
+					<% end %>
+				</td>
+				<% end %>
+			</tr>
+		</table>
+		<div class="pager fr">
+			<% current_page = params[:page].to_i <= 1 ? 1 : params[:page].to_i %>
+			<% if current_page > 1 %>
+			<a rel="prev" href="/users?page=<%=current_page-1%>" style="text-decoration:none"><span class="page-numbers prev">上一页</span></a>
+			<% end %>
+			<% if current_page > 1 || @users.size == 35 %>
+			<span class="page-numbers current"><%=current_page%></span>
+			<% end %>
+			<% if @users.size == 35 %>
+			<a rel="next" href="/users?page=<%=current_page+1%>" style="text-decoration:none"><span class="page-numbers next">下一页</span></a>
+			<% end %>
+		</div>
+	</div>
+</div>

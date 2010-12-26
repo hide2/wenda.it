@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
 
-  def index
+    def index
+    @users = User.paginate(params[:page] || 1)
     @youareat = "users"
+  end
+  
+  def search
+    @users = User.search(params[:keyword])
+    render :layout => false
   end
   
   def show

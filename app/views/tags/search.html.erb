@@ -1,5 +1,6 @@
 <table>
 	<tr>
+		<% (1..5).each do |tds| %>
 		<td class="tag-col">
 			<% (1..13).each do |i| %>
 			<% if(t = @tags.shift) %>
@@ -7,33 +8,6 @@
 			<% end %>
 			<% end %>
 		</td>
-		<td class="tag-col">
-			<% (1..13).each do |i| %>
-			<% if(t = @tags.shift) %>
-			<a rel="tag" title="查看含有标签 '<%=t.name%>' 的问题" class="post-tag" href="/questions/tagged/<%=t.name%>"><%=t.name%></a><span class="item-multiplier">x <%=t.questions_count%></span><br>
-			<% end %>
-			<% end %>
-		</td>
-		<td class="tag-col">
-			<% (1..13).each do |i| %>
-			<% if(t = @tags.shift) %>
-			<a rel="tag" title="查看含有标签 '<%=t.name%>' 的问题" class="post-tag" href="/questions/tagged/<%=t.name%>"><%=t.name%></a><span class="item-multiplier">x <%=t.questions_count%></span><br>
-			<% end %>
-			<% end %>
-		</td>
-		<td class="tag-col">
-			<% (1..13).each do |i| %>
-			<% if(t = @tags.shift) %>
-			<a rel="tag" title="查看含有标签 '<%=t.name%>' 的问题" class="post-tag" href="/questions/tagged/<%=t.name%>"><%=t.name%></a><span class="item-multiplier">x <%=t.questions_count%></span><br>
-			<% end %>
-			<% end %>
-		</td>
-		<td class="tag-col">
-			<% (1..13).each do |i| %>
-			<% if(t = @tags.shift) %>
-			<a rel="tag" title="查看含有标签 '<%=t.name%>' 的问题" class="post-tag" href="/questions/tagged/<%=t.name%>"><%=t.name%></a><span class="item-multiplier">x <%=t.questions_count%></span><br>
-			<% end %>
-			<% end %>
-		</td>
+		<% end %>
 	</tr>
 </table>

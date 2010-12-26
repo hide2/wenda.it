@@ -1,0 +1,31 @@
+<table>
+	<tr>
+		<% (1..5).each do |tds| %>
+		<td>
+			<% (1..7).each do |i| %>
+			<% if(u = @users.shift) %>
+			<div class="user-info">
+				<div class="user-gravatar32">
+					<a href="/users/<%=u.id%>">
+						<img width="32" height="32" alt="" src="<%=u.avatar_path || '/images/avatar.jpg'%>">
+					</a>
+				</div>
+				<div class="user-details">
+					<a href="/users/<%=u.id%>"><%=u.name%></a><br>
+					<span title="reputation score" class="reputation-score">9,656</span>
+					<span title="16 silver badges">
+						<span class="badge2"></span>
+						<span class="badgecount">16</span>
+					</span>
+					<span title="46 bronze badges">
+						<span class="badge3"></span>
+						<span class="badgecount">46</span>
+					</span>
+				</div>
+			</div>
+			<% end %>
+			<% end %>
+		</td>
+		<% end %>
+	</tr>
+</table>

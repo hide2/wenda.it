@@ -18,7 +18,11 @@ WendaIt::Application.routes.draw do
       get 'search'
     end
   end
-  resources :users
+  resources :users do
+    collection do
+      get 'search'
+    end
+  end
   resources :badges
   
   match 'unanswered' => 'questions#unanswered'

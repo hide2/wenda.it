@@ -1,0 +1,11 @@
+<div class="module" id="recent-users">
+	<h4 id="h-recent-users">最近用户</h4>
+	<ul id="recent-users-list">
+		<% @recent_users.each do |u| %>
+		<li style="list-style:circle outside none">
+		<a href="/users/<%=u.id%>"><%=u.name%></a>
+		</li>
+		<% end %>
+	</ul>
+	<p class="ar"><a href="/users">所有用户 &raquo;</a></p>
+</div>
