@@ -17,7 +17,7 @@ class Question
   many :answers
   
   def self.hot(count = 20)
-    all(:limit => count, :order => "votes_count, answers_count DESC, views_count DESC, created_at DESC")
+    all(:limit => count, :order => "votes_count DESC, answers_count DESC, views_count DESC, created_at DESC")
   end
   
   def self.paginate(page = 1, limit = 20)

@@ -2,8 +2,16 @@ WendaIt::Application.routes.draw do
   
   root :to => "welcome#index"
   
-  resources :questions
-  resources :answers
+  resources :questions do
+    member do
+      post 'vote'
+    end
+  end
+  resources :answers do
+    member do
+      post 'vote'
+    end
+  end
   resources :tags
   resources :users
   resources :badges

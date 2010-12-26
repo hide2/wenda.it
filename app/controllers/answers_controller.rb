@@ -26,6 +26,17 @@ class AnswersController < ApplicationController
     end
   end
   
+  def vote
+    @answer = Answer.find(params[:id])
+    if params[:delta] == 'up'
+      @answer.votes_count += 1
+    elsif params[:delta] == 'down'
+      @answer.votes_count -= 1
+    end
+    @answer.save
+    render :text => @answer.votes_count
+  end
+  
   private
   
     def validate_answer

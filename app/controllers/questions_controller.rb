@@ -28,6 +28,17 @@ class QuestionsController < ApplicationController
     @youareat = "questions"
   end
   
+  def vote
+    @question = Question.find(params[:id])
+    if params[:delta] == 'up'
+      @question.votes_count += 1
+    elsif params[:delta] == 'down'
+      @question.votes_count -= 1
+    end
+    @question.save
+    render :text => @question.votes_count
+  end
+  
   def preview
     render :text => RDiscount.new(params[:data]).to_html
   end
