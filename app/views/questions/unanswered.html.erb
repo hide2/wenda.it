@@ -35,6 +35,19 @@
 		</div>
 		<% end %>
 	</div>
+	
+	<div class="pager">
+		<% current_page = params[:page].to_i <= 1 ? 1 : params[:page].to_i %>
+		<% if current_page > 1 %>
+		<a rel="prev" href="/unanswered?page=<%=current_page-1%>" style="text-decoration:none"><span class="page-numbers prev">上一页</span></a>
+		<% end %>
+		<% if current_page > 1 || @questions.size == LIMIT %>
+		<span class="page-numbers current"><%=current_page%></span>
+		<% end %>
+		<% if @questions.size == LIMIT %>
+		<a rel="next" href="/unanswered?page=<%=current_page+1%>" style="text-decoration:none"><span class="page-numbers next">下一页</span></a>
+		<% end %>
+	</div>
 </div>
 
 <div id="sidebar">

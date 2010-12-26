@@ -16,16 +16,18 @@ class Question
   belongs_to :user
   many :answers
   
-  def self.hot(count = 20)
-    all(:limit => count, :order => "votes_count DESC, answers_count DESC, views_count DESC, created_at DESC")
+  def self.hot(limit = LIMIT)
+    all(:limit => limit, :order => "votes_count DESC, answers_count DESC, views_count DESC, created_at DESC")
   end
   
-  def self.paginate(page = 1, limit = 20)
-    all(:limit => limit, :offset => (page-1)*20, :order => "created_at DESC")
+  def self.paginate(page = 1, limit = LIMIT)
+    raise "Wrong page" if page.to_i < 1
+    all(:limit => limit, :offset => (page.to_i-1)*limit, :order => "created_at DESC")
   end
   
-  def self.unanswered(page = 1, limit = 20)
-    t = all(:answers_count => 0, :limit => limit, :offset => (page-1)*20, :order => "created_at DESC")
+  def self.unanswered(page = 1, limit = LIMIT)
+    raise "Wrong page" if page.to_i < 1
+    t = all(:answers_count => 0, :limit => limit, :offset => (page.to_i-1)*limit, :order => "created_at DESC")
     t
   end
   
