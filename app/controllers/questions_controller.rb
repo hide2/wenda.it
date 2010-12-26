@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
   
   def tagged
     @tag = Tag.find_by_name(params[:tag])
-    @questions = Question.all("tags.name" => @tag.name)
+    @questions = Question.tagged(@tag.name)
     @youareat = "tags"
   end
 
@@ -22,9 +22,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @question.views_count += 1
     @question.save
-    if !@question.has_best_answer?
-      @answer = Answer.new
-    end
+    @answer = Answer.new
     @youareat = "questions"
   end
   
@@ -59,7 +57,6 @@ class QuestionsController < ApplicationController
     @question.title = params[:question][:title].strip
     @question.content = params[:question][:content]
     @question.tags = params[:tags].strip
-    p @question
     if @errors.empty?
       if !login?
         @user.save

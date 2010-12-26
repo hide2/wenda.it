@@ -3,7 +3,7 @@
 <script type="text/javascript" src="/markitup/jquery.markitup.js"></script>
 <script type="text/javascript" src="/markitup/sets/markdown/set.js"></script>
 
-<script language="javascript">
+<script>
 $(document).ready(function() {
 	$('#post-editor textarea').markItUp(mySettings);
 });
@@ -141,6 +141,12 @@ function best_answer(aid, is_best_answer) {
 								<% else %>
 								<span id="answer_accept_<%=a.id%>" class="vote-accepted-off" style="display:none" title="点此确认为最佳答案" onclick="best_answer('<%=a.id%>', '1')">accept</span>
 								<span id="answer_unaccept_<%=a.id%>" class="vote-accepted-on" title="点此取消为最佳答案" onclick="best_answer('<%=a.id%>', '0')">accepted</span>
+								<% end %>
+							<% else %>
+								<% if @question.best_answer_id != a.id %>
+								<span id="answer_accept_<%=a.id%>" class="vote-accepted-off" style="cursor: text" title="非最佳答案">accept</span>
+								<% else %>
+								<span id="answer_unaccept_<%=a.id%>" class="vote-accepted-on" style="cursor: text" title="最佳答案">accepted</span>
 								<% end %>
 							<% end %>
 						</div>

@@ -27,8 +27,12 @@ class Question
   
   def self.unanswered(page = 1, limit = LIMIT)
     raise "Wrong page" if page.to_i < 1
-    t = all(:answers_count => 0, :limit => limit, :offset => (page.to_i-1)*limit, :order => "created_at DESC")
-    t
+    all(:best_answer_id => nil, :limit => limit, :offset => (page.to_i-1)*limit, :order => "created_at DESC")
+  end
+  
+  def self.tagged(tag, page = 1, limit = LIMIT)
+    raise "Wrong page" if page.to_i < 1
+    all("tags.name" => tag, :limit => limit, :offset => (page.to_i-1)*limit, :order => "created_at DESC")
   end
   
   def save_tags(tags)

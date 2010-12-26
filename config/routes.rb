@@ -13,7 +13,11 @@ WendaIt::Application.routes.draw do
       post 'best_answer'
     end
   end
-  resources :tags
+  resources :tags do
+    collection do
+      get 'search'
+    end
+  end
   resources :users
   resources :badges
   
