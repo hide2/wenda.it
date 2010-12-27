@@ -1,1 +1,77 @@
-<%=@user.name%>
+<div id="mainbar-full">
+	<div class="subheader">
+		<h1 id="user-displayname"><%=@user.name%></h1>
+	</div>
+
+	<table class="vcard">
+		<tr>
+			<td style="vertical-align: top; width: 170px;">
+				<table>
+					<tr>
+						<td id="user-avatar">
+							<img width="128" height="128" class="logo" alt="" src="<%=@user.avatar_path || '/images/avatar.jpg'%>">
+						</td>
+					</tr>
+					<tr>
+						<td class="summaryinfo">
+							<span class="summarycount">0</span>
+							<div style="margin-top: 5px; font-weight: bold;">荣誉</div>
+						</td>
+					</tr>
+					<tr style="height: 30px;">
+						<td style="vertical-align: bottom;" class="summaryinfo"><%=@user.views_count%>次查看</td>
+					</tr>
+				</table>
+			</td>
+			<td style="vertical-align: top; width: 350px;">
+				<h2 style="margin-top: 20px;">
+					<%= @user.crypted_password.nil? ? '非':''%>注册用户
+				</h2>
+				<table class="user-details">
+					<tr>
+						<td style="width: 120px;">用户名</td>
+						<td class="fn nickname" style="width: 230px;"><b><%=@user.name%></b></td>
+					</tr>
+					<tr>
+						<td>年龄</td>
+						<td><span title="<%= ss @user.created_at%>" class="cool"><%=years_in_words(@user.created_at)%></span></td>
+					</tr>
+					<tr>
+						<td>上次登录</td>
+						<td><span class="cool"><span class="relativetime"><%= ss @user.last_login %></span></span></td>
+					</tr>
+				</table>
+			</td>
+
+			<td style="width: 390px;">
+				<div class="note" id="user-about-me">关于我。。。</div>
+			</td>
+		</tr>
+	</table>
+
+	<div class="subheader">
+		<h1>统计</h1>
+	</div>
+
+	<table class="summary-title">
+		<tr>
+			<td><div class="summarycount ar">0</div></td>
+			<td class="summary-header"><h2>问题</h2></td>
+		</tr>
+	</table>
+	
+	<table class="summary-title">
+		<tr>
+			<td><div class="summarycount ar">0</div></td>
+			<td class="summary-header"><h2>回答</h2></td>
+		</tr>
+	</table>
+
+	<table class="summary-title">
+		<tr>
+			<td><div class="summarycount ar">0</div></td>
+			<td class="summary-header"><h2>标签</h2></td>
+		</tr>
+	</table>
+
+</div>

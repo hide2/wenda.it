@@ -2,9 +2,16 @@
 $(document).ready(function() {
     $("#username").focus();
 });
+function imgUploading() {
+	if(!$('#image').val().match(/(.jpg|.jpeg|.gif|.png)$/i)){
+		alert('图片格式错误，图片只能上传.jpg .jpeg .gif .png 格式的！');
+		$('#image').val('');
+		return;
+	}
+}
 </script>
 
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, :html => {:multipart => true}) do |f| %>
 
 <div class="form-item ask-title">
 	<input type="hidden" name="prev_action" value="<%=@prev_action%>">
@@ -42,6 +49,14 @@ $(document).ready(function() {
 			</td>
 			<td>
 				<input type="text" tabindex="108" value="<%= @user.email%>" maxlength="40" size="40" name="email" id="email">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="email">头像</label>
+			</td>
+			<td>
+				<input type="file" tabindex="109" onchange="imgUploading()" size="30" id="image" name="image">
 			</td>
 		</tr>
 	</table>

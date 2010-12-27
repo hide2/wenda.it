@@ -6,6 +6,8 @@ class User
   key :crypted_password,  String
   key :email,             String
   key :avatar_path,       String
+  key :views_count,       Integer, :default => 0
+  key :last_login,        Time
   timestamps!
   
   many :questions
@@ -38,6 +40,24 @@ class User
   
   def self.search(keyword)
     all(:name => /#{keyword}/, :limit => 35, :order => "created_at DESC")
+  end
+  
+  def save_avatar(img)
+    img_name = self.id.to_s + "." + img.original_filename.split(".").last
+    directory = AVATAR_PATH
+    abs_directory = Rails.root.to_s + "/public" + directory
+    if !File.exist?(abs_directory)
+      Dir.mkdir abs_directory
+    end
+    img_path = File.join(directory, img_name)
+    abs_path = Rails.root.to_s + "/public" + img_path
+    File.open(abs_path, "wb") { |f| f.write(img.read) }
+    self.avatar_path = img_path
+    self.save
+  end
+  
+  def avatar
+    self.avatar_path.blank?
   end
   
 end

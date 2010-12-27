@@ -65,6 +65,7 @@ class QuestionsController < ApplicationController
     @question.tags = params[:tags].strip
     if @errors.empty?
       if !login?
+        @user.last_login = Time.now
         @user.save
         session[:user_id] = @user.id
       end

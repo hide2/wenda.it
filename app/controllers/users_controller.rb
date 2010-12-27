@@ -37,7 +37,9 @@ class UsersController < ApplicationController
     validate_new_user
     if @errors.empty?
         @user.password = params[:password].strip
+        @user.last_login = Time.now
         @user.save
+        @user.save_avatar(params[:image]) if params[:image]
         session[:user_id] = @user.id
         redirect_to "/"
     else
@@ -50,8 +52,9 @@ class UsersController < ApplicationController
     if @errors.empty?
         @user.password = params[:password].strip if !params[:password].blank?
         @user.save
+        @user.save_avatar(params[:image]) if params[:image]
         session[:user_id] = @user.id
-        redirect_to "/"
+        redirect_to @user
     else
       @prev_action = params[:prev_action]
       render :action => @prev_action
@@ -63,6 +66,8 @@ class UsersController < ApplicationController
       validate_login
       if @errors.empty?
         session[:user_id] = @user.id
+        @user.last_login = Time.now
+        @user.save
         redirect_to params[:returnurl] || "/"
       else
         flash[:_username] = params[:username]

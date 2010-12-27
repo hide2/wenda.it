@@ -3,7 +3,7 @@ module ApplicationHelper
   def time_ago_in_words(from_time, include_seconds = true)
     distance_of_time_in_words(from_time, Time.now, include_seconds)
   end
-
+  
   def distance_of_time_in_words(from_time, to_time = 0, include_seconds = true)
     from_time = from_time.to_time if from_time.respond_to?(:to_time)
     to_time = to_time.to_time if to_time.respond_to?(:to_time)
@@ -32,8 +32,25 @@ module ApplicationHelper
     end
   end
   
+  def years_in_words(from_time)
+    to_time = Time.now
+    from_time = from_time.to_time if from_time.respond_to?(:to_time)
+    to_time = to_time.to_time if to_time.respond_to?(:to_time)
+    distance_in_days = (((to_time - from_time).abs)/(60*60*24)).round
+    case distance_in_days
+    when 0                then "1 天"
+    when 1..30            then "#{distance_in_days} 天"
+    when 31..365          then "#{distance_in_days/30} 个月"
+    else                       "#{distance_in_days/365} 年 #{(distance_in_days%365)/30} 个月"
+    end
+  end
+  
   def s(t)
     t.strftime("%Y-%m-%d %H:%M:%S")
+  end
+  
+  def ss(t)
+    t.strftime("%Y-%m-%d %H:%M")
   end
   
   DISALLOWED_TAGS = %w(script iframe) unless defined?(DISALLOWED_TAGS)
