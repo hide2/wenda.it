@@ -1,0 +1,66 @@
+<script language="javascript">
+$(document).ready(function() {
+    $("#username").focus();
+});
+</script>
+
+<%= form_for(@user) do |f| %>
+
+<div class="form-item ask-title">
+	<input type="hidden" name="prev_action" value="<%=@prev_action%>">
+	<table class="ask-title-table">
+		<tr>
+			<td>
+				<label for="username">用户名</label>
+			</td>
+			<td>
+				<input type="text" tabindex="105" value="<%= @user.name%>" maxlength="30" size="30" name="username" id="username" <%=login? ? 'disabled':''%>>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="password">密码</label>
+			</td>
+			<td>
+				<input type="password" tabindex="106" value="" maxlength="40" size="40" name="password" id="password">
+				<% if @prev_action == 'edit' %>
+					(不输入密码表示不对密码进行更改)
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="password_confirm">重复密码</label>
+			</td>
+			<td>
+				<input type="password" tabindex="107" value="" maxlength="40" size="40" name="password_confirm" id="password_confirm">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="email">Email</label>
+			</td>
+			<td>
+				<input type="text" tabindex="108" value="<%= @user.email%>" maxlength="40" size="40" name="email" id="email">
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div class="form-error">
+	<% if @errors %>
+	<p>咦？出错了:</p>
+	<ul>
+		<% @errors.each do |e| %>
+		<li><%= e %></li>
+		<% end %>
+	</ul>
+	<% end %>
+</div>
+
+<div class="form-submit cbt">
+	<% submit_text = @user.new? ? "注册" : "提交" %>
+	<%= f.submit submit_text, :tabindex=>"120", :style=>"width: 160px"%>
+</div>
+
+<% end %>

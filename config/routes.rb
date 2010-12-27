@@ -25,6 +25,10 @@ WendaIt::Application.routes.draw do
   end
   resources :badges
   
+  match 'signup' => 'users#signup'
+  match 'login' => 'users#login'
+  match 'logout' => 'users#logout'
+  
   match 'unanswered' => 'questions#unanswered'
   match 'questions/preview' => 'questions#preview'
   match 'questions/tagged/:tag' => 'questions#tagged'

@@ -234,7 +234,7 @@ function best_answer(aid, is_best_answer) {
 			<table>
 				<tr>
 					<td class="vm open-id-login">
-						<a href="/users/login?returnurl=%2fquestions%2f<%=@question.id%>" style="font-size: 200%; margin-left: 30px;" id="login-link">登录</a>
+						<a href="/login?returnurl=%2fquestions%2f<%=@question.id%>" style="font-size: 200%; margin-left: 30px;" id="login-link">登录</a>
 					</td>
 					<td class="orcell">
 						<div class="orword">or</div>
@@ -242,12 +242,12 @@ function best_answer(aid, is_best_answer) {
 					</td>
 					<td class="vm">
 						<div>
-							<label for="display-name">用户名</label>
-							<input type="text" tabindex="105" value="<%= flash[:_username] ? flash[:_username] : ''%>" maxlength="20" size="30" name="username" id="username">
+							<label for="username">用户名</label>
+							<input type="text" tabindex="105" value="<%= flash[:_username] ? flash[:_username] : ''%>" maxlength="30" size="30" name="username" id="username">
 						</div>
 						<div>
 							<label for="email">Email</label>
-							<input type="text" tabindex="106" value="<%= flash[:_email] ? flash[:_email] : ''%>" maxlength="50" size="40" name="email" id="email">
+							<input type="text" tabindex="106" value="<%= flash[:_email] ? flash[:_email] : ''%>" maxlength="40" size="40" name="email" id="email">
 						</div>
 					</td>
 				</tr>

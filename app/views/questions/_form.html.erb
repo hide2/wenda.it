@@ -49,12 +49,12 @@ $(document).ready(function() {
 			</td>
 			<td class="vm">
 				<div>
-					<label for="display-name">用户名</label>
-					<input type="text" tabindex="105" value="<%=@user ? @user.name : ''%>" maxlength="20" size="30" name="username" id="username">
+					<label for="username">用户名</label>
+					<input type="text" tabindex="105" value="<%=@user ? @user.name : ''%>" maxlength="30" size="30" name="username" id="username">
 				</div>
 				<div>
 					<label for="email">Email</label>
-					<input type="text" tabindex="106" value="<%=@user ? @user.email : ''%>" maxlength="50" size="40" name="email" id="email">
+					<input type="text" tabindex="106" value="<%=@user ? @user.email : ''%>" maxlength="40" size="40" name="email" id="email">
 				</div>
 			</td>
 		</tr>
@@ -80,5 +80,5 @@ $(document).ready(function() {
 	<% submit_text = @question.new? ? "发布问题" : "保存修改" %>
 	<%= f.submit submit_text, :tabindex=>"120", :style=>"width: 160px"%>
 </div>
-				
+
 <% end %>

@@ -1,0 +1,57 @@
+<div id="mainbar-full">
+	<div class="subheader">
+		<h1 id="h-users">用户登录</h1>
+	</div>
+
+	<script language="javascript">
+		$(document).ready(function() {
+	    $("#username").focus();
+	});
+	</script>
+	
+	<form method="post" id="login" class="login" action="/login" accept-charset="UTF-8">
+		<div style="margin: 0pt; padding: 0pt; display: inline;">
+			<input type="hidden" value="✓" name="utf8">
+			<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>   
+			<input type="hidden" value="<%=params[:returnurl]%>" name="returnurl">
+		</div>
+
+		<div class="form-item ask-title">
+			<table class="ask-title-table">
+				<tr>
+					<td>
+						<label for="username">用户名/Email</label>
+					</td>
+					<td>
+						<input type="text" id="username" name="username" size="40" maxlength="40" value="<%= flash[:_username] ? flash[:_username] : ''%>" tabindex="105">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="password">密码</label>
+					</td>
+					<td>
+						<input type="password" id="password" name="password" size="40" maxlength="40" value="" tabindex="106">
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="form-error">
+			<% if @errors %>
+			<p>咦？出错了:</p>
+			<ul>
+				<% @errors.each do |e| %>
+				<li><%= e %></li>
+				<% end %>
+			</ul>
+			<% end %>
+		</div>
+		
+		<div class="form-submit cbt">
+			<input type="submit" value="登录" tabindex="120" style="width: 160px;" name="commit" id="user_submit">
+		</div>
+	
+	</form>
+
+</div>
