@@ -21,7 +21,7 @@ class QuestionsController < ApplicationController
     @questions = @tag.nil? ? [] : Question.tagged(@tag.name)
     @recent_tags = Tag.recent
     @recent_users = User.recent
-    @youareat = "tags"
+    @youareat = "questions"
   end
 
   def show
