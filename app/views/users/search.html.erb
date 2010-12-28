@@ -12,15 +12,7 @@
 				</div>
 				<div class="user-details">
 					<a href="/users/<%=u.id%>"><%=u.name%></a><br>
-					<span title="reputation score" class="reputation-score">9,656</span>
-					<span title="16 silver badges">
-						<span class="badge2"></span>
-						<span class="badgecount">16</span>
-					</span>
-					<span title="46 bronze badges">
-						<span class="badge3"></span>
-						<span class="badgecount">46</span>
-					</span>
+					<%=u.questions_count%>, <%=u.answers_count%>, <%=u.tags_count%>
 				</div>
 			</div>
 			<% end %>
