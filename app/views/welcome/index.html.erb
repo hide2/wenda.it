@@ -24,7 +24,7 @@
 				
 				<div class="tags">
 					<% q.tags.each do |t| %>
-					<a rel="tag" title="查看含有标签 '<%=t['name']%>' 的问题" class="post-tag" href="/questions/tagged/<%=t['name']%>"><%=t['name']%></a> 
+					<a rel="tag" title="查看含有标签 '<%=t['name']%>' 的问题" class="post-tag" href="/questions/tagged/<%=u t['name']%>"><%=t['name']%></a> 
 					<% end %>
 				</div>
 				<div class="started">

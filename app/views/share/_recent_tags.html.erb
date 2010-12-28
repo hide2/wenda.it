@@ -2,7 +2,7 @@
 	<h4 id="h-recent-tags">最近标签</h4>
 	<div id="recent-tags-list">
 		<% @recent_tags.each do |t| %>
-		<a href="/questions/tagged/<%=t.name%>" class="post-tag" title="查看含有标签 '<%=t.name%>'的问题" rel="tag"><%=t.name%></a><span class="item-multiplier">x <%=t.questions_count%></span><br>
+		<a href="/questions/tagged/<%=u t.name%>" class="post-tag" title="查看含有标签 '<%=t.name%>'的问题" rel="tag"><%=t.name%></a><span class="item-multiplier">x <%=t.questions_count%></span><br>
 		<% end %>
 	</div>
 	<p class="ar"><a href="/tags">所有标签 &raquo;</a></p>

@@ -31,7 +31,7 @@ WendaIt::Application.routes.draw do
   
   match 'unanswered' => 'questions#unanswered'
   match 'questions/preview' => 'questions#preview'
-  match 'questions/tagged/:tag' => 'questions#tagged'
+  match 'questions/tagged/:tag' => 'questions#tagged', :constraints => { :tag => /.*/ }
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

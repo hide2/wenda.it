@@ -35,7 +35,7 @@ function finished(keyword) {
 				<td class="tag-col">
 					<% (1..13).each do |i| %>
 					<% if(t = tags.shift) %>
-					<a rel="tag" title="查看含有标签 '<%=t.name%>' 的问题" class="post-tag" href="/questions/tagged/<%=t.name%>"><%=t.name%></a><span class="item-multiplier">x <%=t.questions_count%></span><br>
+					<a rel="tag" title="查看含有标签 '<%=t.name%>' 的问题" class="post-tag" href="/questions/tagged/<%=u t.name%>"><%=t.name%></a><span class="item-multiplier">x <%=t.questions_count%></span><br>
 					<% end %>
 					<% end %>
 				</td>

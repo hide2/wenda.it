@@ -18,7 +18,7 @@ class QuestionsController < ApplicationController
   
   def tagged
     @tag = Tag.find_by_name(params[:tag])
-    @questions = Question.tagged(@tag.name)
+    @questions = @tag.nil? ? [] : Question.tagged(@tag.name)
     @recent_tags = Tag.recent
     @recent_users = User.recent
     @youareat = "tags"
