@@ -44,7 +44,7 @@
 			</td>
 
 			<td style="width: 390px;">
-				<div class="note" id="user-about-me">关于我。。。</div>
+				<div class="note" id="user-about-me"><%=raw blacklist @user.about_me || '这个家伙很懒。。'%></div>
 			</td>
 		</tr>
 	</table>

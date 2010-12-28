@@ -6,6 +6,7 @@ class User
   key :crypted_password,  String
   key :email,             String
   key :avatar_path,       String
+  key :about_me,          String
   key :views_count,       Integer, :default => 0
   key :last_login,        Time
   timestamps!

@@ -50,6 +50,7 @@ class UsersController < ApplicationController
   def update
     validate_update_user
     if @errors.empty?
+        @user.about_me = params[:about_me]
         @user.password = params[:password].strip if !params[:password].blank?
         @user.save
         @user.save_avatar(params[:image]) if params[:image]

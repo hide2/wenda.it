@@ -63,6 +63,14 @@ function imgUploading() {
 				<% end %>
 			</td>
 		</tr>
+		<tr>
+			<td>
+				<label for="about_me" style="vertical-align: middle">个人简介</label>
+			</td>
+			<td>
+				<textarea tabindex="110" rows="12" cols="80" name="about_me" id="about_me"><%= @user.about_me%></textarea>
+			</td>
+		</tr>
 		<% end %>
 	</table>
 </div>
