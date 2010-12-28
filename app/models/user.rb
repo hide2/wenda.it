@@ -10,6 +10,9 @@ class User
   key :views_count,       Integer, :default => 0
   key :last_login_time,   Time
   key :last_login_ip,     String
+  key :tags,              Array
+  # tags in ruby: [{"id" => "4d1033f698d1b102cb00000a", "name" => "ruby"}, {"id" => "4d1033f698d1b102cb00000b", "name" =>"rails"}]
+  # tags in bson: [{"id" : "4d1033f698d1b102cb00000a", "name" : "ruby"}, {"id" => "4d1033f698d1b102cb00000b", "name" : "rails"}]
   timestamps!
   
   many :questions
@@ -60,6 +63,32 @@ class User
   
   def avatar
     self.avatar_path.blank?
+  end
+  
+  def save_tags(tags)
+    tags.each do |t|
+      self.tags << {"id" => t.id.to_s, "name" => t.name} if !self.has_tag(t)
+    end
+    self.save
+  end
+  
+  def has_tag(t)
+    self.tags.each do |tag|
+      return true if tag["name"] == t.name
+    end
+    return false
+  end
+  
+  def questions_count
+    Question.count(:user_id => self.id)
+  end
+  
+  def answers_count
+    Answer.count(:user_id => self.id)
+  end
+  
+  def tags_count
+    self.tags.size
   end
   
 end

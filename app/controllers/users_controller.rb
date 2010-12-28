@@ -12,6 +12,8 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find params[:id]
+    @user.views_count += 1
+    @user.save
     @youareat = "users"
   end
   

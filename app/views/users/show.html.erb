@@ -12,12 +12,6 @@
 							<img width="128" height="128" class="logo" alt="" src="<%=@user.avatar_path || '/images/avatar.jpg'%>">
 						</td>
 					</tr>
-					<tr>
-						<td class="summaryinfo">
-							<span class="summarycount">0</span>
-							<div style="margin-top: 5px; font-weight: bold;">荣誉</div>
-						</td>
-					</tr>
 					<tr style="height: 30px;">
 						<td style="vertical-align: bottom;" class="summaryinfo"><%=@user.views_count%>次查看</td>
 					</tr>
@@ -55,21 +49,21 @@
 
 	<table class="summary-title">
 		<tr>
-			<td><div class="summarycount ar">0</div></td>
+			<td><div class="summarycount ar"><%=@user.questions_count%></div></td>
 			<td class="summary-header"><h2>问题</h2></td>
 		</tr>
 	</table>
 	
 	<table class="summary-title">
 		<tr>
-			<td><div class="summarycount ar">0</div></td>
+			<td><div class="summarycount ar"><%=@user.answers_count%></div></td>
 			<td class="summary-header"><h2>回答</h2></td>
 		</tr>
 	</table>
 
 	<table class="summary-title">
 		<tr>
-			<td><div class="summarycount ar">0</div></td>
+			<td><div class="summarycount ar"><%=@user.tags_count%></div></td>
 			<td class="summary-header"><h2>标签</h2></td>
 		</tr>
 	</table>

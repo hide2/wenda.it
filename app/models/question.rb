@@ -8,7 +8,7 @@ class Question
   key :views_count,     Integer, :default => 0
   key :user_id,         ObjectId
   key :best_answer_id,  ObjectId
-  key :tags,          Array
+  key :tags,            Array
   # tags in ruby: [{"id" => "4d1033f698d1b102cb00000a", "name" => "ruby"}, {"id" => "4d1033f698d1b102cb00000b", "name" =>"rails"}]
   # tags in bson: [{"id" : "4d1033f698d1b102cb00000a", "name" : "ruby"}, {"id" => "4d1033f698d1b102cb00000b", "name" : "rails"}]
   timestamps!
@@ -54,6 +54,7 @@ class Question
       tags_array << t
     end
     self.tags = tags_array.map{|t|{"id" => t.id.to_s, "name" => t.name}}
+    self.user.save_tags(tags_array)
   end
   
   def has_tag(t)
