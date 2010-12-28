@@ -57,6 +57,9 @@ function imgUploading() {
 			</td>
 			<td>
 				<input type="file" tabindex="109" onchange="imgUploading()" size="30" id="image" name="image">
+				<% if @prev_action == 'edit' %>
+				<img width="70" height="70" class="logo" alt="" src="<%=@user.avatar_path || '/images/avatar.jpg'%>">
+				<% end %>
 			</td>
 		</tr>
 	</table>
