@@ -51,17 +51,19 @@ function imgUploading() {
 				<input type="text" tabindex="108" value="<%= @user.email%>" maxlength="40" size="40" name="email" id="email">
 			</td>
 		</tr>
+		<% if @prev_action == 'edit' %>
 		<tr>
 			<td>
 				<label for="email">头像</label>
 			</td>
 			<td>
 				<input type="file" tabindex="109" onchange="imgUploading()" size="30" id="image" name="image">
-				<% if @prev_action == 'edit' %>
+				<% if @user.avatar_path %>
 				<img width="70" height="70" class="logo" alt="" src="<%=@user.avatar_path || '/images/avatar.jpg'%>">
 				<% end %>
 			</td>
 		</tr>
+		<% end %>
 	</table>
 </div>
 
