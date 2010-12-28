@@ -37,7 +37,8 @@ class UsersController < ApplicationController
     validate_new_user
     if @errors.empty?
         @user.password = params[:password].strip
-        @user.last_login = Time.now
+        @user.last_login_time = Time.now
+        @user.last_login_ip = request.remote_ip
         @user.save
         @user.save_avatar(params[:image]) if params[:image]
         session[:user_id] = @user.id
@@ -67,7 +68,8 @@ class UsersController < ApplicationController
       validate_login
       if @errors.empty?
         session[:user_id] = @user.id
-        @user.last_login = Time.now
+        @user.last_login_time = Time.now
+        @user.last_login_ip = request.remote_ip
         @user.save
         redirect_to params[:returnurl] || "/"
       else

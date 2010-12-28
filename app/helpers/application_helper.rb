@@ -53,6 +53,10 @@ module ApplicationHelper
     t.strftime("%Y-%m-%d %H:%M")
   end
   
+  def sss(t)
+    t.strftime("%Y-%m-%d")
+  end
+  
   DISALLOWED_TAGS = %w(script iframe) unless defined?(DISALLOWED_TAGS)
 
   def blacklist(html)
@@ -78,6 +82,10 @@ module ApplicationHelper
       html = new_text
     end
     html
+  end
+  
+  def show_ip_address(ip)
+    IP_LIB.find(ip).country.to_s
   end
 
 end

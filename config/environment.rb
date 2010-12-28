@@ -9,3 +9,6 @@ LIMIT = 10
 
 # user avatar upload path
 AVATAR_PATH = "/upload/images/avatar/"
+
+# find ip address
+IP_LIB = QQWry::QQWryFile.new

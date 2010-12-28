@@ -8,7 +8,8 @@ class User
   key :avatar_path,       String
   key :about_me,          String
   key :views_count,       Integer, :default => 0
-  key :last_login,        Time
+  key :last_login_time,   Time
+  key :last_login_ip,     String
   timestamps!
   
   many :questions

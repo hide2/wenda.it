@@ -38,7 +38,7 @@
 					</tr>
 					<tr>
 						<td>上次登录</td>
-						<td><span class="cool"><span class="relativetime"><%= ss @user.last_login %></span></span></td>
+						<td><span class="cool"><span class="relativetime"><%= show_ip_address @user.last_login_ip %>, <%= sss @user.last_login_time %></span></span></td>
 					</tr>
 				</table>
 			</td>

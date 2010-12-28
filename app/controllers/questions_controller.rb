@@ -71,7 +71,8 @@ class QuestionsController < ApplicationController
     @question.content = params[:question][:content]
     if @errors.empty?
       if !login?
-        @user.last_login = Time.now
+        @user.last_login_time = Time.now
+        @user.last_login_ip = request.remote_ip
         @user.save
         session[:user_id] = @user.id
       end
