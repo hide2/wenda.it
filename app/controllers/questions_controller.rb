@@ -62,7 +62,6 @@ class QuestionsController < ApplicationController
     @question = Question.new
     @question.title = params[:question][:title].strip
     @question.content = params[:question][:content]
-    @question.tags = params[:tags].strip
     if @errors.empty?
       if !login?
         @user.last_login = Time.now
@@ -82,7 +81,6 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @question.title = params[:question][:title].strip
     @question.content = params[:question][:content]
-    @question.tags = params[:tags].strip
     if @errors.empty?
       @question.save_tags(params[:tags])
       @question.save
@@ -102,7 +100,7 @@ class QuestionsController < ApplicationController
   private
   
     def validate_question
-      params[:tags].gsub!("请使用空格分隔多个标签", "")
+      params[:tags].gsub("请使用空格分隔多个标签", "").strip!
       @errors = []
       if params[:question][:title].size <= 10
         @errors << "标题不能短于10个字符"
