@@ -23,6 +23,13 @@ class QuestionsController < ApplicationController
     @recent_users = User.recent
     @youareat = "questions"
   end
+  
+  def search
+    @questions = Question.search(params[:q], params[:page] || 1)
+    @recent_tags = Tag.recent
+    @recent_users = User.recent
+    @youareat = "questions"
+  end
 
   def show
     @question = Question.find(params[:id])

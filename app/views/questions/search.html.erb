@@ -1,0 +1,56 @@
+<div id="mainbar">
+	<div class="subheader">
+		<h1 id="h-top-questions">含有 '<%=params[:q]%>' 的问题</h1>
+	</div>
+	<div id="question-mini-list">
+		<% @questions.each do |q| %>
+		<div class="question-summary narrow" id="question-summary-<%=q.id%>">
+			<div onclick="window.location.href='/questions/<%=q.id%>'" class="cp">
+				<div class="votes">
+					<div class="mini-counts"><%=q.votes_count%></div>
+					<div>顶</div>
+				</div>
+				<div class="status <%= q.has_best_answer? ? 'answered-accepted' : q.answers_count > 0 ? 'answered' : 'unanswered'%>" title="<%= q.has_best_answer? ? '该问题已有最佳答案' : q.answers_count > 0 ? '该问题还没有最佳答案' : '该问题还没有答案'%>">
+					<div class="mini-counts"><%=q.answers_count%></div>
+					<div>回答</div>
+				</div>
+				<div class="views">
+					<div class="mini-counts"><%=q.views_count%></div>
+					<div>查看</div>
+				</div>
+			</div>
+			<div class="summary">
+				<h3><a href="/questions/<%=q.id%>" class="question-hyperlink" title="<%=q.content%>"><%=q.title%></a></h3>
+				
+				<div class="tags">
+					<% q.tags.each do |t| %>
+					<a rel="tag" title="查看含有标签 '<%=t['name']%>' 的问题" class="post-tag" href="/questions/tagged/<%=u t['name']%>"><%=t['name']%></a> 
+					<% end %>
+				</div>
+				<div class="started">
+					<span class="relativetime" title="<%= s q.created_at%>"><%=time_ago_in_words(q.created_at)%></span>
+					<a href="/users/<%=q.user.id%>" ><%=q.user.name%></a> <span class="reputation-score" title="reputation score">66</span>
+				</div>
+			</div>
+		</div>
+		<% end %>
+	</div>
+	
+	<div class="pager">
+		<% current_page = params[:page].to_i <= 1 ? 1 : params[:page].to_i %>
+		<% if current_page > 1 %>
+		<a rel="prev" href="/search?q=<%=params[:q]%>&page=<%=current_page-1%>" style="text-decoration:none"><span class="page-numbers prev">上一页</span></a>
+		<% end %>
+		<% if current_page > 1 || @questions.size == LIMIT %>
+		<span class="page-numbers current"><%=current_page%></span>
+		<% end %>
+		<% if @questions.size == LIMIT %>
+		<a rel="next" href="/search?q=<%=params[:q]%>&page=<%=current_page+1%>" style="text-decoration:none"><span class="page-numbers next">下一页</span></a>
+		<% end %>
+	</div>
+</div>
+
+<div id="sidebar">
+	<%= render :partial => "share/recent_tags" %>
+	<%= render :partial => "share/recent_users" %>
+</div>
