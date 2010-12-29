@@ -116,6 +116,7 @@ function best_answer(aid, is_best_answer) {
 		<!-- show best answer on the top -->
 		<% if @question.has_best_answer?
 			a = @question.best_answer %>
+		<a name="<%=a.id%>"></a>
 		<div class="answer">
 			<table>
 				<tr>
@@ -167,6 +168,7 @@ function best_answer(aid, is_best_answer) {
 		<!-- show other answers below -->
 		<% @question.answers.each do |a| %>
 		<% 	if @question.best_answer_id != a.id %>
+		<a name="<%=a.id%>"></a>
 		<div class="answer">
 			<table>
 				<tr>
