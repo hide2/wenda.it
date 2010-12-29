@@ -128,7 +128,7 @@
 		</table>
 		<table style="margin-left: 50px">
 			<tr>
-				<td class="wide-tag-col">
+				<td style="width: 700px">
 					<% @user.tags.each do |t| %>
 					<a rel="tag" title="查看含有标签 '<%=t['name']%>' 的问题" class="post-tag" href="/questions/tagged/<%=u t['name']%>"><%=t['name']%></a>
 					<% end %>
