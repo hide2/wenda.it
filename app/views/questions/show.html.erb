@@ -10,11 +10,19 @@ $(document).ready(function() {
 function vote(type, id, is_vote_up) {
 	if(type == 'q') {
 		$.post('/questions/' + id + '/vote', {is_vote_up: is_vote_up}, function(data){
-			$('#question_' + id + '_votes').html(data);
+			if(data.indexOf('success:') != -1) {
+				$('#question_' + id + '_votes').html(data.replace('success:',''));
+			} else {
+				alert(data.replace('failed:',''));
+			}
 		});
 	} else if(type == 'a') {
 		$.post('/answers/' + id + '/vote', {is_vote_up: is_vote_up}, function(data){
-			$('#answer_' + id + '_votes').html(data);
+			if(data.indexOf('success:') != -1) {
+				$('#answer_' + id + '_votes').html(data.replace('success:',''));
+			} else {
+				alert(data.replace('failed:',''));
+			}
 		});
 	}
 }

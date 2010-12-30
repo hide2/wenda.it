@@ -29,14 +29,23 @@ class AnswersController < ApplicationController
   end
   
   def vote
+    if !login?
+      render :text => "failed:请先登录再进行投票！"
+      return
+    end
     @answer = Answer.find(params[:id])
+    if @answer.votes.include?(login_user.id)
+      render :text => "failed:您已经投过票了！"
+      return
+    end
+    @answer.votes << login_user.id
     if params[:is_vote_up] == '1'
       @answer.votes_count += 1
     elsif params[:is_vote_up] == '0'
       @answer.votes_count -= 1
     end
     @answer.save
-    render :text => @answer.votes_count
+    render :text => "success:" + @answer.votes_count.to_s
   end
   
   def best_answer

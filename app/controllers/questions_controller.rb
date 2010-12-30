@@ -40,14 +40,23 @@ class QuestionsController < ApplicationController
   end
   
   def vote
+    if !login?
+      render :text => "failed:请先登录再进行投票！"
+      return
+    end
     @question = Question.find(params[:id])
+    if @question.votes.include?(login_user.id)
+      render :text => "failed:您已经投过票了！"
+      return
+    end
+    @question.votes << login_user.id
     if params[:is_vote_up] == '1'
       @question.votes_count += 1
     elsif params[:is_vote_up] == '0'
       @question.votes_count -= 1
     end
     @question.save
-    render :text => @question.votes_count
+    render :text => "success:" + @question.votes_count.to_s
   end
   
   def preview
