@@ -108,7 +108,8 @@ class QuestionsController < ApplicationController
   private
   
     def validate_question
-      params[:tags].gsub("请使用空格分隔多个标签", "").strip!
+      params[:tags].gsub!("请使用空格分隔多个标签", "")
+      params[:tags].strip!
       @errors = []
       if params[:question][:title].size <= 10
         @errors << "标题不能短于10个字符"
