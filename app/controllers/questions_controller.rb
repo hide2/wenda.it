@@ -37,6 +37,9 @@ class QuestionsController < ApplicationController
     @question.save
     @answer = Answer.new
     @youareat = "questions"
+    @title = @question.title + " - " + SITE_NAME
+    @meta = @question.title
+    @keywords = @question.tags.map{|t|t["name"]}.join(' ')
   end
   
   def vote

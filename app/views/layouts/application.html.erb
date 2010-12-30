@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>wenda.it</title>
+		<title><%=@title ? @title : DEFAULT_TITLE%></title>
+		<meta name="description" content="<%=@meta ? @meta : DEFAULT_META%>" />
+		<meta name="keywords"  content="<%=@keywords ? @keywords : DEFAULT_KEYWORDS%>" />
 		<link rel="shortcut icon" href="/images/favicon.ico">
 		<link rel="stylesheet" type="text/css" href="/stylesheets/all.css">
 		<%=javascript_include_tag 'jquery' %>
