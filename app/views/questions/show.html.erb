@@ -224,8 +224,7 @@ function best_answer(aid, is_best_answer) {
 		<%	end %>
 		<% end %>
 		
-		<% if !(login? && login_user.id == @question.user_id) %>
-			<%= form_for(@answer) do |f| %>
+		<%= form_for(@answer) do |f| %>
 		<h2 class="space">我来回答</h2>
 		<div id="post-editor">
 			<div id="wmd-container">
@@ -275,7 +274,6 @@ function best_answer(aid, is_best_answer) {
 			<% submit_text = "提交答案" %>
 			<%= f.submit submit_text, :tabindex=>"120", :style=>"width: 160px"%>
 		</div>
-			<% end %>
 		<% end %>
 	</div>
 
