@@ -7,14 +7,14 @@
 		<div class="question-summary narrow" id="question-summary-<%=q.id%>">
 			<div onclick="window.location.href='/questions/<%=q.id%>'" class="cp">
 				<div class="votes">
-					<div class="mini-counts"><%=q.votes_count%></div>
+					<div title="<%=q.votes_count%>顶" class="mini-counts"><%=q.votes_count%></div>
 					<div>顶</div>
 				</div>
 				<div class="status <%= q.has_best_answer? ? 'answered-accepted' : q.answers_count > 0 ? 'answered' : 'unanswered'%>" title="<%= q.has_best_answer? ? '该问题已有最佳答案' : q.answers_count > 0 ? '该问题还没有最佳答案' : '该问题还没有答案'%>">
 					<div class="mini-counts"><%=q.answers_count%></div>
 					<div>回答</div>
 				</div>
-				<div class="views">
+				<div title="<%=q.views_count%>查看" class="views">
 					<div class="mini-counts"><%=q.views_count%></div>
 					<div>查看</div>
 				</div>
