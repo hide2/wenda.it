@@ -14,7 +14,6 @@ class UsersController < ApplicationController
     @user = User.find params[:id]
     @user.views_count += 1
     @user.save
-    @youareat = "users"
   end
   
   def signup
@@ -26,13 +25,11 @@ class UsersController < ApplicationController
       raise "请先退出系统！"
     end
     @prev_action = "signup"
-    @youareat = "users"
   end
   
   def edit
     @user = login_user
     @prev_action = "edit"
-    @youareat = "users"
   end
   
   def create
@@ -79,7 +76,6 @@ class UsersController < ApplicationController
         render :action => "login"
       end
     end
-    @youareat = "users"
   end
   
   def logout

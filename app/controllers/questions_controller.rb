@@ -14,18 +14,15 @@ class QuestionsController < ApplicationController
   
   def answered
     @questions = Question.answered(params[:page] || 1)
-    @youareat = "questions"
   end
   
   def tagged
     @tag = Tag.find_by_name(params[:tag])
     @questions = @tag.nil? ? [] : Question.tagged(@tag.name)
-    @youareat = "questions"
   end
   
   def search
     @questions = Question.search(params[:q], params[:page] || 1)
-    @youareat = "questions"
   end
 
   def show
@@ -33,7 +30,6 @@ class QuestionsController < ApplicationController
     @question.views_count += 1
     @question.save
     @answer = Answer.new
-    @youareat = "questions"
     @title = @question.title + " - " + SITE_NAME
     @meta = @question.title
     @keywords = @question.tags.map{|t|t["name"]}.join(' ')
@@ -65,12 +61,10 @@ class QuestionsController < ApplicationController
   
   def new
     @question = Question.new
-    @youareat = "new_question"
   end
   
   def edit
     @question = Question.find(params[:id])
-    @youareat = "questions"
   end
   
   def create

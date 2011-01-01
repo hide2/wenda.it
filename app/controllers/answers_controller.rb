@@ -30,7 +30,6 @@ class AnswersController < ApplicationController
   
   def edit
     @answer = Answer.find(params[:id])
-    @youareat = "questions"
   end
   
   def update
