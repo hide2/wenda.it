@@ -10,7 +10,7 @@
 					<div title="<%=q.votes_count%>顶" class="mini-counts"><%=q.votes_count%></div>
 					<div>顶</div>
 				</div>
-				<div class="status <%= q.has_best_answer? ? 'answered-accepted' : q.answers_count > 0 ? 'answered' : 'unanswered'%>" title="<%= q.has_best_answer? ? '该问题已有最佳答案' : q.answers_count > 0 ? '该问题还没有最佳答案' : '该问题还没有答案'%>">
+				<div class="status <%= q.answers_count > 0 ? 'answered' : 'unanswered'%>" title="<%= q.has_best_answer? ? '该问题已有最佳答案' : q.answers_count > 0 ? '该问题还没有最佳答案' : '该问题还没有答案'%>">
 					<div class="mini-counts"><%=q.answers_count%></div>
 					<div>回答</div>
 				</div>
@@ -50,7 +50,4 @@
 	</div>
 </div>
 
-<div id="sidebar">
-	<%= render :partial => "share/recent_tags" %>
-	<%= render :partial => "share/recent_users" %>
-</div>
+<%= render :partial => "share/list_page_sidebar" %>

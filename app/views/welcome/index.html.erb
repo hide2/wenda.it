@@ -1,6 +1,6 @@
 <div id="mainbar">
 	<div class="subheader">
-		<h1 id="h-top-questions">热点问题</h1>
+		<h1 id="h-top-questions" style="color:#9A4444">热点问题</h1>
 	</div>
 	<div id="question-mini-list">
 		<% @questions.each do |q| %>
@@ -37,7 +37,4 @@
 	<h2 class="bottom-notice">想查看更多问题？你可以浏览<a href="/questions">完整问题列表</a>，或者<a href="/tags">热门标签</a>。回答<a href="/unanswered">待解决问题</a>，赢得<a>徽章</a>。</h2>
 </div>
 
-<div id="sidebar">
-	<%= render :partial => "share/recent_tags" %>
-	<%= render :partial => "share/recent_users" %>
-</div>
+<%= render :partial => "share/list_page_sidebar" %>

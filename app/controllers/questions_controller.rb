@@ -4,30 +4,27 @@ class QuestionsController < ApplicationController
   
   def index
     @questions = Question.paginate(params[:page] || 1)
-    @recent_tags = Tag.recent
-    @recent_users = User.recent
     @youareat = "questions"
   end
   
   def unanswered
     @questions = Question.unanswered(params[:page] || 1)
-    @recent_tags = Tag.recent
-    @recent_users = User.recent
     @youareat = "unanswered"
+  end
+  
+  def answered
+    @questions = Question.answered(params[:page] || 1)
+    @youareat = "questions"
   end
   
   def tagged
     @tag = Tag.find_by_name(params[:tag])
     @questions = @tag.nil? ? [] : Question.tagged(@tag.name)
-    @recent_tags = Tag.recent
-    @recent_users = User.recent
     @youareat = "questions"
   end
   
   def search
     @questions = Question.search(params[:q], params[:page] || 1)
-    @recent_tags = Tag.recent
-    @recent_users = User.recent
     @youareat = "questions"
   end
 

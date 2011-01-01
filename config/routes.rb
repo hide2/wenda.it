@@ -32,6 +32,7 @@ WendaIt::Application.routes.draw do
   match 'logout' => 'users#logout'
   
   match 'unanswered' => 'questions#unanswered'
+  match 'answered' => 'questions#answered'
   match 'questions/preview' => 'questions#preview'
   match 'questions/tagged/:tag' => 'questions#tagged', :constraints => { :tag => /.*/ }
   match 'search' => 'questions#search'
