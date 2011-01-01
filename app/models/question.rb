@@ -55,7 +55,7 @@ class Question
   
   def save_tags(tags)
     tags_array = []
-    tags.split(" ").uniq.each do |tag|
+    tags.gsub(",", " ").gsub("，", " ").split(" ").uniq.each do |tag|
       t = Tag.find_by_name(tag)
       if t
         t.questions_count += 1 if !self.has_tag(t)

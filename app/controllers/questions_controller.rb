@@ -83,6 +83,7 @@ class QuestionsController < ApplicationController
       @question.save
       redirect_to @question
     else
+      @question.tags = params[:tags]
       render :action => "new"
     end
   end
@@ -96,6 +97,7 @@ class QuestionsController < ApplicationController
       @question.save
       redirect_to @question
     else
+      @question.tags = params[:tags]
       render :action => "edit"
     end
   end
@@ -109,7 +111,7 @@ class QuestionsController < ApplicationController
   private
   
     def validate_question
-      params[:tags].gsub!("请使用空格分隔多个标签", "")
+      params[:tags].gsub!("请使用空格或逗号分隔多个标签", "")
       params[:tags].strip!
       @errors = []
       if params[:question][:title].size <= 10
