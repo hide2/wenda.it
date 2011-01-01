@@ -148,7 +148,11 @@ function best_answer(aid, is_best_answer) {
 						<table class="fw">
 							<tr>
 								<td class="vt">
-									<div class="post-menu"></div>
+									<div class="post-menu">
+										<% if login? && login_user.id == a.user_id %>
+										<a title="修改或补充此答案" href="/answers/<%=a.id%>/edit">修改</a>
+										<% end %>
+									</div>
 								</td>
 								<td align="right" class="post-signature">
 									<div class="user-info">
@@ -198,7 +202,11 @@ function best_answer(aid, is_best_answer) {
 						<table class="fw">
 							<tr>
 								<td class="vt">
-									<div class="post-menu"></div>
+									<div class="post-menu">
+										<% if login? && login_user.id == a.user_id %>
+										<a title="修改或补充此答案" href="/answers/<%=a.id%>/edit">修改</a>
+										<% end %>
+									</div>
 								</td>
 								<td align="right" class="post-signature">
 									<div class="user-info">

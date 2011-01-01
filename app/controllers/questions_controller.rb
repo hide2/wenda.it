@@ -73,7 +73,6 @@ class QuestionsController < ApplicationController
   
   def edit
     @question = Question.find(params[:id])
-    @question.content = @question.content
     @youareat = "questions"
   end
   
@@ -106,7 +105,6 @@ class QuestionsController < ApplicationController
       @question.save
       redirect_to @question
     else
-      @question.content = @question.content
       render :action => "edit"
     end
   end

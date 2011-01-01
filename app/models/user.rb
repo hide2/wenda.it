@@ -4,6 +4,7 @@ class User
   key :name,              String
   key :salt,              String
   key :crypted_password,  String
+  key :identify_url,      String
   key :email,             String
   key :avatar_path,       String
   key :about_me,          String

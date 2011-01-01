@@ -28,6 +28,23 @@ class AnswersController < ApplicationController
     end
   end
   
+  def edit
+    @answer = Answer.find(params[:id])
+    @youareat = "questions"
+  end
+  
+  def update
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
+    @answer.content = params[:answer][:content]
+    if @errors.empty?
+      @answer.save
+      redirect_to @question
+    else
+      render :action => "edit"
+    end
+  end
+  
   def vote
     if !login?
       render :text => "failed:请先登录再进行投票！"

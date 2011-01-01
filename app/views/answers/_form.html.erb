@@ -1,0 +1,46 @@
+<link rel="stylesheet" type="text/css" href="/markitup/skins/simple/style.css" />
+<link rel="stylesheet" type="text/css" href="/markitup/sets/markdown/style.css" />
+<script type="text/javascript" src="/markitup/jquery.markitup.js"></script>
+<script type="text/javascript" src="/markitup/sets/markdown/set.js"></script>
+
+<script language="javascript">
+$(document).ready(function() {
+    $('#post-editor textarea').markItUp(mySettings);
+    $("#content").focus();
+});
+</script>
+
+<%= form_for(@answer) do |f| %>
+
+<div id="question-header">
+	<h1>
+		<a href="/questions/<%=@answer.question.id%>" class="question-hyperlink"><%=@answer.question.title%></a>
+	</h1>
+</div>
+
+<div id="post-editor">
+	<div id="wmd-container">
+		<%= f.text_area :content, :class=>"processed", :tabindex=>"101", :rows=>"15", :cols=>"92", :id=>"wmd-input" %>
+	</div>
+</div>
+
+<div class="form-error">
+	<% if @errors %>
+	<script>
+		$().ready(function() {window.scrollBy(0,100000);});
+	</script>
+	<p>咦？出错了:</p>
+	<ul>
+		<% @errors.each do |e| %>
+		<li><%= e %></li>
+		<% end %>
+	</ul>
+	<% end %>
+</div>
+
+<div class="form-submit cbt">
+	<% submit_text = "保存修改" %>
+	<%= f.submit submit_text, :tabindex=>"120", :style=>"width: 160px"%>
+</div>
+
+<% end %>
