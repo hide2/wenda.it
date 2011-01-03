@@ -61,6 +61,7 @@ class QuestionsController < ApplicationController
   
   def new
     @question = Question.new
+    @youareat = "new_question"
   end
   
   def edit
