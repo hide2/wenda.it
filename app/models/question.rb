@@ -35,8 +35,7 @@ class Question
   
   def self.answered(page = 1, limit = LIMIT)
     raise "Wrong page" if page.to_i < 1
-    #  todo best_answer_id => !nil  ???
-    all(:best_answer_id => nil, :limit => limit, :offset => (page.to_i-1)*limit, :order => "created_at DESC")
+    all(:best_answer_id.ne => nil, :limit => limit, :offset => (page.to_i-1)*limit, :order => "created_at DESC")
   end
   
   def self.tagged(tag, page = 1, limit = LIMIT)
