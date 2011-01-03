@@ -41,11 +41,11 @@ class QuestionsController < ApplicationController
       return
     end
     @question = Question.find(params[:id])
-    if @question.votes.include?(login_user.id)
+    if @question.votes.include?(current_user.id)
       render :text => "failed:您已经投过票了！"
       return
     end
-    @question.votes << login_user.id
+    @question.votes << current_user.id
     if params[:is_vote_up] == '1'
       @question.votes_count += 1
     elsif params[:is_vote_up] == '0'
@@ -73,10 +73,7 @@ class QuestionsController < ApplicationController
     @question.content = params[:question][:content]
     if @errors.empty?
       if !login?
-        @user.last_login_time = Time.now
-        @user.last_login_ip = request.remote_ip
-        @user.save
-        session[:user_id] = @user.id
+        log_in(@user)
       end
       @question.user = @user
       @question.save_tags(params[:tags])
@@ -124,7 +121,7 @@ class QuestionsController < ApplicationController
         @errors << "至少需要一个标签"
       end
       if login?
-        @user = login_user
+        @user = current_user
       else
         @user = User.new
         @user.name = params[:username].strip

@@ -2,7 +2,11 @@ WendaIt::Application.routes.draw do
   
   root :to => "welcome#index"
   
-  resources :sessions
+  resources :sessions do
+    collection do
+      get 'problem'
+    end
+  end
   
   resources :questions do
     member do

@@ -7,6 +7,8 @@ require "action_mailer/railtie"
 require "active_resource/railtie"
 require "rails/test_unit/railtie"
 
+require 'rack/openid'
+
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
@@ -41,6 +43,8 @@ module WendaIt
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
     config.time_zone = 'Beijing'  
+    
+    config.middleware.use 'Rack::OpenID'
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]

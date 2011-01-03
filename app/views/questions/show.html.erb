@@ -85,7 +85,7 @@ function best_answer(aid, is_best_answer) {
 							<tr>
 								<td class="vt">
 									<div class="post-menu">
-										<% if login? && login_user.id == @question.user_id %>
+										<% if login? && current_user.id == @question.user_id %>
 										<%= link_to '修改', edit_question_path(@question), :title=>"修改或补充此问题" %>
 										<% end %>
 									</div>
@@ -101,7 +101,7 @@ function best_answer(aid, is_best_answer) {
 											</a>
 										</div>
 										<div class="user-details">
-											<a href="/users/<%=@question.user.id%>"><%=@question.user.name%></a><br>
+											<a href="/users/<%=@question.user.id%>"><%=@question.user.display_name%></a><br>
 										</div>
 									</div>
 								</td>
@@ -133,7 +133,7 @@ function best_answer(aid, is_best_answer) {
 							<a class="vote-up-off" title="顶" onclick="vote('a', '<%=a.id%>', '1')">up vote</a>
 							<span class="vote-count-post" id="answer_<%=a.id%>_votes"><%=a.votes_count%></span>
 							<a class="vote-down-off" title="踩" onclick="vote('a', '<%=a.id%>', '0')">down vote</a>
-							<% if login? && login_user.id == @question.user_id %>
+							<% if login? && current_user.id == @question.user_id %>
 								<span id="answer_accept_<%=a.id%>" class="vote-accepted-off" style="display:none" title="点此设置为最佳答案" onclick="best_answer('<%=a.id%>', '1')">accept</span>
 								<span id="answer_unaccept_<%=a.id%>" class="vote-accepted-on" title="点此取消最佳答案" onclick="best_answer('<%=a.id%>', '0')">accepted</span>
 							<% else %>
@@ -149,7 +149,7 @@ function best_answer(aid, is_best_answer) {
 							<tr>
 								<td class="vt">
 									<div class="post-menu">
-										<% if login? && login_user.id == a.user_id %>
+										<% if login? && current_user.id == a.user_id %>
 										<a title="修改或补充此答案" href="/answers/<%=a.id%>/edit">修改</a>
 										<% end %>
 									</div>
@@ -165,7 +165,7 @@ function best_answer(aid, is_best_answer) {
 											</a>
 										</div>
 										<div class="user-details">
-											<a href="/users/<%=a.user.id%>"><%=a.user.name%></a><br>
+											<a href="/users/<%=a.user.id%>"><%=a.user.display_name%></a><br>
 										</div>
 									</div>
 								</td>
@@ -189,7 +189,7 @@ function best_answer(aid, is_best_answer) {
 							<a class="vote-up-off" title="顶" onclick="vote('a', '<%=a.id%>', '1')">up vote</a>
 							<span class="vote-count-post" id="answer_<%=a.id%>_votes"><%=a.votes_count%></span>
 							<a class="vote-down-off" title="踩" onclick="vote('a', '<%=a.id%>', '0')">down vote</a>
-							<% if login? && login_user.id == @question.user_id %>
+							<% if login? && current_user.id == @question.user_id %>
 								<span id="answer_accept_<%=a.id%>" class="vote-accepted-off" title="点此设置为最佳答案" onclick="best_answer('<%=a.id%>', '1')">accept</span>
 								<span id="answer_unaccept_<%=a.id%>" class="vote-accepted-on" style="display:none" title="点此取消最佳答案" onclick="best_answer('<%=a.id%>', '0')">accepted</span>
 							<% end %>
@@ -203,7 +203,7 @@ function best_answer(aid, is_best_answer) {
 							<tr>
 								<td class="vt">
 									<div class="post-menu">
-										<% if login? && login_user.id == a.user_id %>
+										<% if login? && current_user.id == a.user_id %>
 										<a title="修改或补充此答案" href="/answers/<%=a.id%>/edit">修改</a>
 										<% end %>
 									</div>
@@ -219,7 +219,7 @@ function best_answer(aid, is_best_answer) {
 											</a>
 										</div>
 										<div class="user-details">
-											<a href="/users/<%=a.user.id%>"><%=a.user.name%></a><br>
+											<a href="/users/<%=a.user.id%>"><%=a.user.display_name%></a><br>
 										</div>
 									</div>
 								</td>

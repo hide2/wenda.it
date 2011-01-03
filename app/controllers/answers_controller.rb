@@ -9,10 +9,7 @@ class AnswersController < ApplicationController
     @answer.question_id = params[:answer][:question_id]
     if @errors.empty?
       if !login?
-        @user.last_login_time = Time.now
-        @user.last_login_ip = request.remote_ip
-        @user.save
-        session[:user_id] = @user.id
+        log_in(@user)
       end
       @answer.user = @user
       @answer.save
@@ -50,11 +47,11 @@ class AnswersController < ApplicationController
       return
     end
     @answer = Answer.find(params[:id])
-    if @answer.votes.include?(login_user.id)
+    if @answer.votes.include?(current_user.id)
       render :text => "failed:您已经投过票了！"
       return
     end
-    @answer.votes << login_user.id
+    @answer.votes << current_user.id
     if params[:is_vote_up] == '1'
       @answer.votes_count += 1
     elsif params[:is_vote_up] == '0'
@@ -84,7 +81,7 @@ class AnswersController < ApplicationController
         @errors << "答案不能为空"
       end
       if login?
-        @user = login_user
+        @user = current_user
       else
         @user = User.new
         @user.name = params[:username].strip

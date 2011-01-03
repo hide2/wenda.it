@@ -28,7 +28,7 @@
 				</div>
 				<div class="started">
 					<span class="relativetime" title="<%= s q.created_at%>"><%=time_ago_in_words(q.created_at)%></span>
-					<a href="/users/<%=q.user.id%>" ><%=q.user.name%></a>
+					<a href="/users/<%=q.user.id%>" ><%=q.user.display_name%></a>
 				</div>
 			</div>
 		</div>

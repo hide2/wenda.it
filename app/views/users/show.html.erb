@@ -1,6 +1,6 @@
 <div id="mainbar-full">
 	<div class="subheader">
-		<h1 id="user-displayname"><%=@user.name%></h1>
+		<h1 id="user-displayname"><%=@user.display_name%></h1>
 	</div>
 
 	<table class="vcard">
@@ -24,7 +24,7 @@
 				<table class="user-details">
 					<tr>
 						<td style="width: 120px;">用户名</td>
-						<td class="fn nickname" style="width: 230px;"><b><%=@user.name%></b></td>
+						<td class="fn nickname" style="width: 230px;"><b><%=@user.name || @user.email%></b></td>
 					</tr>
 					<tr>
 						<td>年龄</td>

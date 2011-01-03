@@ -20,6 +20,10 @@ class User
   many :answers
   many :badges
   
+  def display_name
+    self.name || self.email
+  end
+  
   def password=(pass)
     salt = [Array.new(6){rand(256).chr}.join].pack("m").chomp
     self.salt, self.crypted_password = salt, Digest::SHA256.hexdigest(pass + salt)

@@ -17,21 +17,34 @@
 		</div>
 
 		<div class="form-item ask-title">
-			<table class="ask-title-table">
+			<table>
 				<tr>
-					<td>
-						<label for="username">用户名/Email</label>
+					<td style="vertical-align:middle">
+						<table style="width:400px">
+							<tr>
+								<td>
+									<label for="username">用户名/Email</label>
+								</td>
+								<td>
+									<input type="text" id="username" name="username" size="40" maxlength="40" value="<%= flash[:_username] ? flash[:_username] : ''%>" tabindex="105">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label for="password">密码</label>
+								</td>
+								<td>
+									<input type="password" id="password" name="password" size="40" maxlength="40" value="" tabindex="106">
+								</td>
+							</tr>
+						</table>
 					</td>
-					<td>
-						<input type="text" id="username" name="username" size="40" maxlength="40" value="<%= flash[:_username] ? flash[:_username] : ''%>" tabindex="105">
+					<td class="orcell">
+						<div class="orword">or</div>
+						<div class="orline"></div>
 					</td>
-				</tr>
-				<tr>
-					<td>
-						<label for="password">密码</label>
-					</td>
-					<td>
-						<input type="password" id="password" name="password" size="40" maxlength="40" value="" tabindex="106">
+					<td style="vertical-align:middle">
+						<a class="google" href="/sessions/new?openid=google<%=params[:returnurl] ? '&returnurl=' + params[:returnurl] : '' %>" title="使用Google帐号登录"><img src = "/images/log_in_with_google.png"></a>
 					</td>
 				</tr>
 			</table>

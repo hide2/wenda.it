@@ -3,7 +3,7 @@
 	<ul id="recent-users-list">
 		<% @recent_users.each do |u| %>
 		<li style="list-style:circle outside none">
-		<a href="/users/<%=u.id%>"><%=u.name%></a>
+		<a href="/users/<%=u.id%>"><%=u.display_name%></a>
 		</li>
 		<% end %>
 	</ul>
