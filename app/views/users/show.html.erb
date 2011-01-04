@@ -62,7 +62,7 @@
 		</table>
 		<% @user.questions.each do |q| %>
 		<div id="question-summary-<%=q.id%>" class="question-summary narrow" style="margin-left: 50px">
-			<div class="cp" onclick="window.location.href='/questions/<%=q.id%>'">
+			<div class="cp" onclick="window.open('/questions/<%=q.id%>')">
 				<div class="votes">
 					<div title="<%=q.votes_count%>顶" class="mini-counts"><%=q.votes_count%></div>
 					<div>顶</div>
@@ -77,7 +77,7 @@
 				</div>
 			</div>
 			<div class="summary">
-				<h3><a href="/questions/<%=q.id%>" class="question-hyperlink" title="<%=q.content%>"><%=q.title%></a></h3>
+				<h3><a href="/questions/<%=q.id%>" class="question-hyperlink" title="<%=q.content%>" target="_blank"><%=q.title%></a></h3>
 				<div class="tags">
 					<% q.tags.each do |t| %>
 					<a rel="tag" title="查看含有标签 '<%=t['name']%>' 的问题" class="post-tag" href="/questions/tagged/<%=u t['name']%>"><%=t['name']%></a> 
@@ -107,8 +107,8 @@
 		</table>
 		<% @user.answers.each do |a| %>
 		<div class="answer-summary" style="margin-left: 50px">
-			<div onclick="window.location.href='/questions/<%=a.question_id%>#<%=a.id%>'" class="answer-votes <%=a.question.best_answer_id == a.id ? 'answered-accepted' : ''%>" title="<%=a.votes_count%>顶" style="cursor: pointer;"><%=a.votes_count%></div>
-			<div class="answer-link"><a href="/questions/<%=a.question_id%>#<%=a.id%>" class="answer-hyperlink" title="<%=a.content%>"><%=a.question.title%></a></div>
+			<div onclick="window.open('/questions/<%=a.question_id%>#<%=a.id%>')" class="answer-votes <%=a.question.best_answer_id == a.id ? 'answered-accepted' : ''%>" title="<%=a.votes_count%>顶" style="cursor: pointer;"><%=a.votes_count%></div>
+			<div class="answer-link"><a href="/questions/<%=a.question_id%>#<%=a.id%>" class="answer-hyperlink" title="<%=a.content%>" target="_blank"><%=a.question.title%></a></div>
 		</div>
 		<% end %>
 	</div>
