@@ -49,7 +49,7 @@ class User
   end
   
   def self.search(keyword)
-    all(:name => /#{keyword}/, :limit => 35, :order => "created_at DESC")
+    all('$or' => [{:name => /#{keyword}/}, {:email => /#{keyword}/}], :limit => 35, :order => "created_at DESC")
   end
   
   def save_avatar(img)
