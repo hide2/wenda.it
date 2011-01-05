@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
 
+  before_filter :login_required, :only => [:edit, :update, :best_answer]
   before_filter :validate_answer, :only => [:create, :update]
   
   def create
@@ -27,10 +28,15 @@ class AnswersController < ApplicationController
   
   def edit
     @answer = Answer.find(params[:id])
+    if current_user.id != @answer.user_id
+      logger.error "Wrong operation: edit answer #{@answer.id} with user #{current_user.id}"
+      render 'welcome/422'
+    end
   end
   
   def update
     @answer = Answer.find(params[:id])
+    raise "Wrong operation: update answer #{@answer.id} with user #{current_user.id}" if current_user.id != @answer.user_id
     @question = @answer.question
     @answer.content = params[:answer][:content]
     if @errors.empty?
@@ -63,6 +69,7 @@ class AnswersController < ApplicationController
   
   def best_answer
     @answer = Answer.find(params[:id])
+    raise "Wrong operation: best_answer answer #{@answer.id} with user #{current_user.id}" if current_user.id != @answer.user_id
     @question = @answer.question
     if params[:is_best_answer] == '1'
       @question.best_answer_id = @answer.id

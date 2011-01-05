@@ -18,4 +18,12 @@ class ApplicationController < ActionController::Base
     session[:user_id] = user.id
   end
   
+  private
+  
+    def login_required
+      unless login?
+        redirect_to "/login?returnurl=#{request.path}"
+      end
+    end
+  
 end

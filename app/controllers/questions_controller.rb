@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
 
+  before_filter :login_required, :only => [:edit, :update]
   before_filter :validate_question, :only => [:create, :update]
   
   def index
@@ -66,6 +67,10 @@ class QuestionsController < ApplicationController
   
   def edit
     @question = Question.find(params[:id])
+    if current_user.id != @question.user_id
+      logger.error "Wrong operation: edit question #{@question.id} with user #{current_user.id}"
+      render 'welcome/422'
+    end
   end
   
   def create
@@ -88,6 +93,7 @@ class QuestionsController < ApplicationController
   
   def update
     @question = Question.find(params[:id])
+    raise "Wrong operation: update question #{@question.id} with user #{current_user.id}" if current_user.id != @question.user_id
     @question.title = params[:question][:title].strip
     @question.content = params[:question][:content]
     if @errors.empty?
@@ -98,12 +104,6 @@ class QuestionsController < ApplicationController
       @question.tags = params[:tags]
       render :action => "edit"
     end
-  end
-  
-  def destroy
-    @question = Question.find(params[:id])
-    @question.destroy
-    redirect_to questions_url
   end
   
   private
