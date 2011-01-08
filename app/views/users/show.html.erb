@@ -91,7 +91,7 @@
 		<br class="cbt">
 		<% end %>
 	</div>
-	
+	<br class="cbt">
 	<div class="user-stats-table" id="answers-table">
 		<table class="summary-title" style="width: 100%;">
 			<tr>
@@ -112,6 +112,27 @@
 		</div>
 		<% end %>
 	</div>
+	<br class="cbt">
+	<div class="user-stats-table" id="answers-table">
+		<table class="summary-title" style="width: 100%;">
+			<tr>
+				<td>
+					<span class="summarycount ar"><%=@user.comments_count%></span>								 
+				</td>
+				<td class="summary-header">
+					<span style="font-size: 200%">评论</span>
+				</td>
+				<td style="width: 85%;">
+				</td>
+			</tr>
+		</table>
+		<% @user.comments.each do |c| %>
+		<div class="answer-summary" style="margin-left: 50px">
+			<div class="answer-link"><a href="/questions/<%=c.answer.question_id%>#<%=c.id%>" class="answer-hyperlink" title="<%=c.content%>" target="_blank"><%=c.answer.question.title%></a></div>
+		</div>
+		<% end %>
+	</div>
+	<br class="cbt">
 	<div id="tags-table" class="user-stats-table">
 		<table class="summary-title" style="width: 100%;">
 			<tr>
@@ -134,7 +155,6 @@
 				</td>
 			</tr>
 		</table>
-
 	</div>
 
 </div>

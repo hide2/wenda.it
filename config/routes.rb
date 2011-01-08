@@ -19,6 +19,7 @@ WendaIt::Application.routes.draw do
       post 'best_answer'
     end
   end
+  resources :comments
   resources :tags do
     collection do
       get 'search'

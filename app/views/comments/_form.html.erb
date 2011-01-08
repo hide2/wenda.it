@@ -1,0 +1,65 @@
+<script language="javascript">
+$(document).ready(function() {
+    $("textarea").focus();
+});
+</script>
+
+<%= form_for(@comment) do |f| %>
+
+<div id="question-header">
+	<h1>
+		<a href="/questions/<%=@answer.question.id%>" class="question-hyperlink"><%=@answer.question.title%></a>
+	</h1>
+</div>
+<div class="post-text">
+	<%= raw blacklist RDiscount.new(@answer.content).to_html %>
+</div>
+
+<div id="post-editor">
+	<div id="wmd-container">
+		<input type="hidden" name="comment[answer_id]" value="<%=@answer.id%>" />
+		<%= f.text_area :content, :class=>"processed", :tabindex=>"101", :rows=>"15", :cols=>"92", :id=>"wmd-input" %>
+	</div>
+</div>
+<% if !login? %>
+<div class="form-item">
+	<table>
+		<tr>
+			<td class="vm open-id-login">
+				<a href="/login?returnurl=%2fcomments%2fnew?answer_id=<%=@answer.id%>" style="font-size: 200%; margin-left: 30px;" id="login-link">登录</a>
+			</td>
+			<td class="orcell">
+				<div class="orword">or</div>
+				<div class="orline"></div>
+			</td>
+			<td class="vm">
+				<div>
+					<label for="username">用户名</label>
+					<input type="text" tabindex="105" value="<%= flash[:_username] ? flash[:_username] : ''%>" maxlength="30" size="30" name="username" id="username">
+				</div>
+				<div>
+					<label for="email">Email</label>
+					<input type="text" tabindex="106" value="<%= flash[:_email] ? flash[:_email] : ''%>" maxlength="40" size="40" name="email" id="email">
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<% end %>
+<div class="form-error">
+	<% if @errors %>
+	<p>咦？出错了:</p>
+	<ul>
+		<% @errors.each do |e| %>
+		<li><%= e %></li>
+		<% end %>
+	</ul>
+	<% end %>
+</div>
+
+<div class="form-submit cbt">
+	<% submit_text = "提交评论" %>
+	<%= f.submit submit_text, :tabindex=>"120", :style=>"width: 160px"%>
+</div>
+
+<% end %>

@@ -7,7 +7,7 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:answer][:question_id])
     @answer = Answer.new
     @answer.content = params[:answer][:content]
-    @answer.question_id = params[:answer][:question_id]
+    @answer.question_id = @question.id
     if @errors.empty?
       if !login?
         log_in(@user)

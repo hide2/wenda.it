@@ -149,7 +149,9 @@ function best_answer(aid, is_best_answer) {
 							<tr>
 								<td class="vt">
 									<div class="post-menu">
+										<a title="评论此答案" href="/comments/new?answer_id=<%=a.id%>">评论</a>
 										<% if login? && current_user.id == a.user_id %>
+										<span style="color:#888888"> | </span>
 										<a title="修改或补充此答案" href="/answers/<%=a.id%>/edit">修改</a>
 										<% end %>
 									</div>
@@ -171,6 +173,33 @@ function best_answer(aid, is_best_answer) {
 								</td>
 							</tr>
 						</table>
+					</td>
+				</tr>
+				<!-- comments -->
+				<tr>
+					<td class="votecell"></td>
+					<td>
+						<% a.comments.each do |c| %>
+						<a name="<%=c.id%>"></a>
+					    <div class="comments">
+					        <table>
+							    <tr class="comment">
+							        <td class="comment-actions"></td>
+							        <td class="comment-text">
+							        	<div>
+							        		<span class="comment-copy">
+							        			<%= c.content %>
+							        		</span>
+							        		 – <a class="comment-user" href="/users/<%=c.user.id%>"><%=c.user.display_name%></a>
+							        		<span class="comment-date">
+							        			<span title="<%= s c.created_at%>"><%=time_ago_in_words(c.created_at)%></span>
+							        		</span>
+							        	</div>
+							        </td>
+							    </tr>
+					        </table>
+					    </div>
+					    <% end %>
 					</td>
 				</tr>
 			</table>
@@ -203,7 +232,9 @@ function best_answer(aid, is_best_answer) {
 							<tr>
 								<td class="vt">
 									<div class="post-menu">
+										<a title="评论此答案" href="/comments/new?answer_id=<%=a.id%>">评论</a>
 										<% if login? && current_user.id == a.user_id %>
+										<span style="color:#888888"> | </span>
 										<a title="修改或补充此答案" href="/answers/<%=a.id%>/edit">修改</a>
 										<% end %>
 									</div>
@@ -225,6 +256,33 @@ function best_answer(aid, is_best_answer) {
 								</td>
 							</tr>
 						</table>
+					</td>
+				</tr>
+				<!-- comments -->
+				<tr>
+					<td class="votecell"></td>
+					<td>
+						<% a.comments.each do |c| %>
+						<a name="<%=c.id%>"></a>
+					    <div class="comments">
+					        <table>
+							    <tr class="comment">
+							        <td class="comment-actions"></td>
+							        <td class="comment-text">
+							        	<div>
+							        		<span class="comment-copy">
+							        			<%= c.content %>
+							        		</span>
+							        		 – <a class="comment-user" href="/users/<%=c.user.id%>"><%=c.user.display_name%></a>
+							        		<span class="comment-date">
+							        			<span title="<%= s c.created_at%>"><%=time_ago_in_words(c.created_at)%></span>
+							        		</span>
+							        	</div>
+							        </td>
+							    </tr>
+					        </table>
+					    </div>
+					    <% end %>
 					</td>
 				</tr>
 			</table>

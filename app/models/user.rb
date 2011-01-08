@@ -18,6 +18,7 @@ class User
   
   many :questions
   many :answers
+  many :comments
   many :badges
   
   def display_name
@@ -90,6 +91,10 @@ class User
   
   def answers_count
     Answer.count(:user_id => self.id)
+  end
+  
+  def comments_count
+    Comment.count(:user_id => self.id)
   end
   
   def tags_count
