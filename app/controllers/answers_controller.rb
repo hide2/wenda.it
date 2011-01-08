@@ -69,8 +69,8 @@ class AnswersController < ApplicationController
   
   def best_answer
     @answer = Answer.find(params[:id])
-    raise "Wrong operation: best_answer answer #{@answer.id} with user #{current_user.id}" if current_user.id != @answer.user_id
     @question = @answer.question
+    raise "Wrong operation: best_answer answer #{@answer.id} with user #{current_user.id}" if current_user.id != @question.user_id
     if params[:is_best_answer] == '1'
       @question.best_answer_id = @answer.id
     elsif params[:is_best_answer] == '0'
