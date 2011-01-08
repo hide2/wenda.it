@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
       end
       @comment.user = @user
       @comment.save
-      redirect_to "/questions/#{@answer.question_id}" + "#" + "#{@answer.id}"
+      redirect_to "/questions/#{@answer.question_id}" + "#" + "#{@comment.id}"
     else
       flash[:_username] = @user.name
       flash[:_email] = @user.email
