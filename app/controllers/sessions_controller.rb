@@ -4,10 +4,10 @@ class SessionsController < ApplicationController
     flash[:returnurl] = params[:returnurl] if params[:returnurl]
     if params[:login_with] == 'google'
       login_with_google
-    elsif params[:login_with] == 'douban'
-      login_with_douban
     elsif params[:login_with] == 'sina'
       login_with_sina
+    elsif params[:login_with] == 'douban'
+      login_with_douban
     else
       render 'welcome/404'
     end
@@ -30,6 +30,21 @@ class SessionsController < ApplicationController
     else
       redirect_to '/login'
     end
+  end
+  
+  def sina_login
+    @oauth_verifier = params[:oauth_verifier]
+    @access_token = flash[:request_token].get_access_token(:oauth_verifier => @oauth_verifier)
+    sina_id = ''
+    doc = REXML::Document.new(@access_token.get("/account/verify_credentials.xml").body)
+    doc.elements.each('user/name') do |e|
+      sina_id = e.text + "@sina"
+    end
+    user = User.where(:identify_id => sina_id).first || User.new
+    user.name = sina_id if user.name.nil?
+    user.identify_id = sina_id
+    log_in(user)
+    redirect_to(flash[:returnurl] || root_path)
   end
   
   def douban_login
@@ -60,21 +75,6 @@ class SessionsController < ApplicationController
     redirect_to(flash[:returnurl] || root_path)
   end
   
-  def sina_login
-    @oauth_verifier = params[:oauth_verifier]
-    @access_token = flash[:request_token].get_access_token(:oauth_verifier => @oauth_verifier)
-    sina_id = ''
-    doc = REXML::Document.new(@access_token.get("/account/verify_credentials.xml").body)
-    doc.elements.each('user/name') do |e|
-      sina_id = e.text + "@sina"
-    end
-    user = User.where(:identify_id => sina_id).first || User.new
-    user.name = sina_id if user.name.nil?
-    user.identify_id = sina_id
-    log_in(user)
-    redirect_to(flash[:returnurl] || root_path)
-  end
-  
   private
     def login_with_google
       response.headers['WWW-Authenticate'] = Rack::OpenID.build_header(
@@ -83,6 +83,19 @@ class SessionsController < ApplicationController
           :return_to => google_login_sessions_url,
           :method => 'POST')
       head 401
+    end
+  
+    def login_with_sina
+      @consumer = OAuth::Consumer.new(
+        SINA_API_KEY, 
+        SINA_API_KEY_SECRET, 
+        { 
+          :site=>"http://api.t.sina.com.cn",
+        }
+      )
+      @request_token = @consumer.get_request_token
+      flash[:request_token] = @request_token
+      redirect_to @request_token.authorize_url + "&oauth_callback=#{sina_login_sessions_url}"
     end
   
     def login_with_douban
@@ -102,19 +115,6 @@ class SessionsController < ApplicationController
       @request_token = @consumer.get_request_token
       flash[:request_token] = @request_token
       redirect_to @request_token.authorize_url + "&oauth_callback=#{douban_login_sessions_url}"
-    end
-  
-    def login_with_sina
-      @consumer = OAuth::Consumer.new(
-        SINA_API_KEY, 
-        SINA_API_KEY_SECRET, 
-        { 
-          :site=>"http://api.t.sina.com.cn",
-        }
-      )
-      @request_token = @consumer.get_request_token
-      flash[:request_token] = @request_token
-      redirect_to @request_token.authorize_url + "&oauth_callback=#{sina_login_sessions_url}"
     end
   
 end
