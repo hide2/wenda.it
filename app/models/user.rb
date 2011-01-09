@@ -4,8 +4,8 @@ class User
   key :name,              String
   key :salt,              String
   key :crypted_password,  String
-  key :identify_url,      String
   key :email,             String
+  key :identify_id,       String
   key :avatar_path,       String
   key :about_me,          String
   key :views_count,       Integer, :default => 0

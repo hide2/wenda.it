@@ -5,6 +5,9 @@ WendaIt::Application.routes.draw do
   resources :sessions do
     collection do
       get 'problem'
+      post 'google_login'
+      get 'douban_login'
+      get 'sina_login'
     end
   end
   

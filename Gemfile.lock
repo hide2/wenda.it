@@ -49,6 +49,7 @@ GEM
       activesupport (>= 2.3.4)
       jnunemaker-validatable (~> 1.8.4)
       plucky (~> 0.3.6)
+    oauth (0.4.4)
     plucky (0.3.6)
       mongo (~> 1.1)
     polyglot (0.3.1)
@@ -88,6 +89,7 @@ PLATFORMS
 DEPENDENCIES
   bson_ext
   mongo_mapper
+  oauth
   rack-openid
   rails (= 3.0.3)
   rdiscount

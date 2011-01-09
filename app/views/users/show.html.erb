@@ -60,7 +60,7 @@
 				</td>
 			</tr>
 		</table>
-		<% @user.questions.each do |q| %>
+		<% @user.questions.sort(:created_at).reverse.each do |q| %>
 		<div id="question-summary-<%=q.id%>" class="question-summary narrow" style="margin-left: 50px">
 			<div class="cp" onclick="window.open('/questions/<%=q.id%>')">
 				<div class="votes">
@@ -105,7 +105,7 @@
 				</td>
 			</tr>
 		</table>
-		<% @user.answers.each do |a| %>
+		<% @user.answers.sort(:created_at).reverse.each do |a| %>
 		<div class="answer-summary" style="margin-left: 50px">
 			<div onclick="window.open('/questions/<%=a.question_id%>#<%=a.id%>')" class="answer-votes <%=a.question.best_answer_id == a.id ? 'answered-accepted' : ''%>" title="<%=a.votes_count%>顶" style="cursor: pointer;"><%=a.votes_count%></div>
 			<div class="answer-link"><a href="/questions/<%=a.question_id%>#<%=a.id%>" class="answer-hyperlink" title="<%=a.content%>" target="_blank"><%=a.question.title%></a></div>
@@ -126,7 +126,7 @@
 				</td>
 			</tr>
 		</table>
-		<% @user.comments.each do |c| %>
+		<% @user.comments.sort(:created_at).reverse.each do |c| %>
 		<div class="answer-summary" style="margin-left: 50px">
 			<div class="answer-link"><a href="/questions/<%=c.answer.question_id%>#<%=c.id%>" class="answer-hyperlink" title="<%=c.content%>" target="_blank"><%=c.answer.question.title%></a></div>
 		</div>

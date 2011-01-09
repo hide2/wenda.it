@@ -44,7 +44,9 @@
 						<div class="orline"></div>
 					</td>
 					<td style="vertical-align:middle">
-						<a class="google" href="/sessions/new?openid=google<%=params[:returnurl] ? '&returnurl=' + params[:returnurl] : '' %>" title="使用Google帐号登录"><img src = "/images/log_in_with_google.png"></a>
+						<a class="login_with" href="/sessions/new?login_with=google<%=params[:returnurl] ? '&returnurl=' + params[:returnurl] : '' %>" title="使用Google帐号登录"><img src = "/images/login_with_google.png"></a>&nbsp;&nbsp;
+						<a class="login_with" href="/sessions/new?login_with=sina<%=params[:returnurl] ? '&returnurl=' + params[:returnurl] : '' %>" title="使用新浪微博帐号登录"><img src = "/images/login_with_sina.png"></a>&nbsp;&nbsp;
+						<a class="login_with" href="/sessions/new?login_with=douban<%=params[:returnurl] ? '&returnurl=' + params[:returnurl] : '' %>" title="使用豆瓣帐号登录"><img src = "/images/login_with_douban.png"></a>
 					</td>
 				</tr>
 			</table>

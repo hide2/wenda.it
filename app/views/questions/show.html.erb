@@ -207,7 +207,7 @@ function best_answer(aid, is_best_answer) {
 		<% end %>
 		
 		<!-- show other answers below -->
-		<% @question.answers.each do |a| %>
+		<% @question.answers.sort(:created_at).reverse.each do |a| %>
 		<% 	if @question.best_answer_id != a.id %>
 		<a name="<%=a.id%>"></a>
 		<div class="answer">

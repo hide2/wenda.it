@@ -22,9 +22,6 @@ function imgUploading() {
 			</td>
 			<td>
 				<input type="text" tabindex="105" value="<%= @user.display_name%>" maxlength="30" size="30" name="username" id="username">
-				<% if /^[a-zA-Z0-9_\.]+@[a-zA-Z0-9-]+[\.a-zA-Z]+$/ =~ @user.display_name %>
-					(如果不想显示您的email，请修改用户名)
-				<% end %>
 			</td>
 		</tr>
 		<tr>
