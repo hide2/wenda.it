@@ -1,1 +1,26 @@
-A Rails+MongoDB implementation of Q&A web application.
+wenda.it is 
+* a Q&A web application
+* a Rails3+MongoDB application
+
+### How to setup wenda.it dev environment
+
+# Install Ruby
+http://www.ruby-lang.org/en/downloads/
+
+# Install MongoDB
+http://www.mongodb.org/display/DOCS/Quickstart
+
+# Install git
+http://book.git-scm.com/2_installing_git.html
+
+# Clone wenda.it project
+git://github.com/hideto/wenda.it.git
+
+# Install required gems
+gem install bundler
+cd wenda.it
+bundle install
+
+# Start rails server
+cd wenda.it
+rails server
