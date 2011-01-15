@@ -84,6 +84,10 @@ class QuestionsController < ApplicationController
       @question.user = @user
       @question.save_tags(params[:tags])
       @question.save
+      key = current_user.id.to_s + "_sina_api_token"
+      if API_TOKENS[key]
+        API_TOKENS[key].post("/statuses/update.xml", :status=>@question.title + " " + question_url(@question))
+      end
       redirect_to @question
     else
       @question.tags = params[:tags]
