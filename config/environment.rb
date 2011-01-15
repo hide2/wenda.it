@@ -25,5 +25,5 @@ SINA_API_KEY_SECRET = ""
 DOUBAN_API_KEY = ""
 DOUBAN_API_KEY_SECRET = ""
 
-# API token hashmap
+# API tokens Hash
 API_TOKENS = {}

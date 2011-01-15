@@ -44,7 +44,7 @@ class SessionsController < ApplicationController
     user.name = sina_id if user.name.nil?
     user.identify_id = sina_id
     log_in(user)
-    current_user.id.to_s + "_sina_api_token"
+    key = current_user.id.to_s + "_sina_api_token"
     API_TOKENS[key] = @access_token
     redirect_to(flash[:returnurl] || root_path)
   end
