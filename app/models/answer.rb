@@ -9,7 +9,7 @@ class Answer
   # tags in ruby: ["4d1033f698d1b102cb00000a", "4d1033f698d1b102cb00000b", "4d1033f698d1b102cb00000c"]
   # tags in bson: ["4d1033f698d1b102cb00000a", "4d1033f698d1b102cb00000b", "4d1033f698d1b102cb00000c"]
   timestamps!
-  
+
   belongs_to :user
   belongs_to :question
   many :comments

@@ -78,7 +78,7 @@ function best_answer(aid, is_best_answer) {
 						</div>
 						<div class="post-taglist">
 							<% @question.tags.each do |t| %>
-							<a rel="tag" title="查看含有标签 '<%=t['name']%>' 的问题" class="post-tag" href="/questions/tagged/<%=u t['name']%>"><%=t['name']%></a> 
+							<a rel="tag" title="查看含有标签 '<%=t['name']%>' 的问题" class="post-tag" href="/questions/tagged/<%=u t['name']%>"><%=t['name']%></a>
 							<% end %>
 						</div>
 						<table class="fw">
@@ -120,7 +120,7 @@ function best_answer(aid, is_best_answer) {
 				<h2><%=@question.answers.size%> 条回答</h2>
 			</div>
 		</div>
-		
+
 		<!-- show best answer on the top -->
 		<% if @question.has_best_answer?
 			a = @question.best_answer %>
@@ -205,7 +205,7 @@ function best_answer(aid, is_best_answer) {
 			</table>
 		</div>
 		<% end %>
-		
+
 		<!-- show other answers below -->
 		<% @question.answers.sort(:created_at).reverse.each do |a| %>
 		<% 	if @question.best_answer_id != a.id %>
@@ -289,7 +289,7 @@ function best_answer(aid, is_best_answer) {
 		</div>
 		<%	end %>
 		<% end %>
-		
+
 		<%= form_for(@answer) do |f| %>
 		<h2 class="space">我来回答</h2>
 		<div id="post-editor">

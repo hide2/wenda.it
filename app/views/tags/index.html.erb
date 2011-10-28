@@ -1,7 +1,7 @@
 <%=javascript_include_tag 'jquery.typewatch' %>
 
 <script>
-$(function() { 
+$(function() {
     $("#tagfilter").focus().typeWatch({ highlight:true, wait:500, captureLength: -1, callback: finished });
 });
 
@@ -23,7 +23,7 @@ function finished(keyword) {
 		<table>
 			<tr>
 				<td>查找标签:</td>
-				<td style="padding-left: 5px;"><input type="text" name="tagfilter" id="tagfilter"></td>			
+				<td style="padding-left: 5px;"><input type="text" name="tagfilter" id="tagfilter"></td>
 			</tr>
 		</table>
 	</div>

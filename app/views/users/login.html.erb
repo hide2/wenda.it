@@ -8,11 +8,11 @@
 	    $("#username").focus();
 	});
 	</script>
-	
+
 	<form method="post" id="login" class="login" action="/login" accept-charset="UTF-8">
 		<div style="margin: 0pt; padding: 0pt; display: inline;">
 			<input type="hidden" value="✓" name="utf8">
-			<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>   
+			<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
 			<input type="hidden" value="<%=params[:returnurl]%>" name="returnurl">
 		</div>
 
@@ -51,7 +51,7 @@
 				</tr>
 			</table>
 		</div>
-		
+
 		<div class="form-error">
 			<% if @errors %>
 			<p>咦？出错了:</p>
@@ -62,11 +62,11 @@
 			</ul>
 			<% end %>
 		</div>
-		
+
 		<div class="form-submit cbt">
 			<input type="submit" value="登录" tabindex="120" style="width: 160px;" name="commit" id="user_submit">
 		</div>
-	
+
 	</form>
 
 </div>

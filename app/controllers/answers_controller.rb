@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
 
   before_filter :login_required, :only => [:edit, :update, :best_answer]
   before_filter :validate_answer, :only => [:create, :update]
-  
+
   def create
     @question = Question.find(params[:answer][:question_id])
     @answer = Answer.new
@@ -25,7 +25,7 @@ class AnswersController < ApplicationController
       redirect_to @question
     end
   end
-  
+
   def edit
     @answer = Answer.find(params[:id])
     if current_user.id != @answer.user_id
@@ -33,7 +33,7 @@ class AnswersController < ApplicationController
       render 'welcome/422'
     end
   end
-  
+
   def update
     @answer = Answer.find(params[:id])
     raise "Wrong operation: update answer #{@answer.id} with user #{current_user.id}" if current_user.id != @answer.user_id
@@ -46,7 +46,7 @@ class AnswersController < ApplicationController
       render :action => "edit"
     end
   end
-  
+
   def vote
     if !login?
       render :text => "failed:请先登录再进行投票！"
@@ -66,7 +66,7 @@ class AnswersController < ApplicationController
     @answer.save
     render :text => "success:" + @answer.votes_count.to_s
   end
-  
+
   def best_answer
     @answer = Answer.find(params[:id])
     @question = @answer.question
@@ -79,9 +79,9 @@ class AnswersController < ApplicationController
     @question.save
     render :text => 'success'
   end
-  
+
   private
-  
+
     def validate_answer
       @errors = []
       if params[:answer][:content].blank?
@@ -109,5 +109,5 @@ class AnswersController < ApplicationController
         end
       end
     end
-  
+
 end

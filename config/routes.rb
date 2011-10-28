@@ -1,7 +1,7 @@
 WendaIt::Application.routes.draw do
-  
+
   root :to => "welcome#index"
-  
+
   resources :sessions do
     collection do
       get 'problem'
@@ -10,7 +10,7 @@ WendaIt::Application.routes.draw do
       get 'sina_login'
     end
   end
-  
+
   resources :questions do
     member do
       post 'vote'
@@ -34,17 +34,17 @@ WendaIt::Application.routes.draw do
     end
   end
   resources :badges
-  
+
   match 'signup' => 'users#signup'
   match 'login' => 'users#login'
   match 'logout' => 'users#logout'
-  
+
   match 'unanswered' => 'questions#unanswered'
   match 'answered' => 'questions#answered'
   match 'questions/preview' => 'questions#preview'
   match 'questions/tagged/:tag' => 'questions#tagged', :constraints => { :tag => /.*/ }
   match 'search' => 'questions#search'
-  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
