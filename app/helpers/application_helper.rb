@@ -1,9 +1,9 @@
 module ApplicationHelper
-  
+
   def time_ago_in_words(from_time, include_seconds = true)
     distance_of_time_in_words(from_time, Time.now, include_seconds)
   end
-  
+
   def distance_of_time_in_words(from_time, to_time = 0, include_seconds = true)
     from_time = from_time.to_time if from_time.respond_to?(:to_time)
     to_time = to_time.to_time if to_time.respond_to?(:to_time)
@@ -31,7 +31,7 @@ module ApplicationHelper
     else                  "#{(distance_in_minutes / 525600).round} 年前"
     end
   end
-  
+
   def years_in_words(from_time)
     to_time = Time.now
     from_time = from_time.to_time if from_time.respond_to?(:to_time)
@@ -44,19 +44,19 @@ module ApplicationHelper
     else                       "#{distance_in_days/365} 年 #{(distance_in_days%365)/30} 个月"
     end
   end
-  
+
   def s(t)
     t.strftime("%Y-%m-%d %H:%M:%S")
   end
-  
+
   def ss(t)
     t.strftime("%Y-%m-%d %H:%M")
   end
-  
+
   def sss(t)
     t.strftime("%Y-%m-%d")
   end
-  
+
   DISALLOWED_TAGS = %w(script iframe) unless defined?(DISALLOWED_TAGS)
 
   def blacklist(html)
@@ -83,7 +83,7 @@ module ApplicationHelper
     end
     html
   end
-  
+
   def show_ip_address(ip)
     IP_LIB.find(ip).country.to_s
   end

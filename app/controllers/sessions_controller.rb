@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  
+
   def new
     flash[:returnurl] = params[:returnurl] if params[:returnurl]
     if params[:login_with] == 'google'
@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       render 'welcome/404'
     end
   end
-  
+
   def google_login
     if openid = request.env[Rack::OpenID::RESPONSE]
       case openid.status
@@ -31,7 +31,7 @@ class SessionsController < ApplicationController
       redirect_to '/login'
     end
   end
-  
+
   def sina_login
     @oauth_verifier = params[:oauth_verifier]
     @access_token = flash[:request_token].get_access_token(:oauth_verifier => @oauth_verifier)
@@ -48,7 +48,7 @@ class SessionsController < ApplicationController
     API_TOKENS[key] = @access_token
     redirect_to(flash[:returnurl] || root_path)
   end
-  
+
   def douban_login
     @access_token = flash[:request_token].get_access_token
     @access_token = OAuth::AccessToken.new(
@@ -76,7 +76,7 @@ class SessionsController < ApplicationController
     log_in(user)
     redirect_to(flash[:returnurl] || root_path)
   end
-  
+
   private
     def login_with_google
       response.headers['WWW-Authenticate'] = Rack::OpenID.build_header(
@@ -86,12 +86,12 @@ class SessionsController < ApplicationController
           :method => 'POST')
       head 401
     end
-    
+
     def login_with_sina
       @consumer = OAuth::Consumer.new(
-        SINA_API_KEY, 
-        SINA_API_KEY_SECRET, 
-        { 
+        SINA_API_KEY,
+        SINA_API_KEY_SECRET,
+        {
           :site=>"http://api.t.sina.com.cn",
         }
       )
@@ -99,12 +99,12 @@ class SessionsController < ApplicationController
       flash[:request_token] = @request_token
       redirect_to @request_token.authorize_url + "&oauth_callback=#{sina_login_sessions_url}"
     end
-  
+
     def login_with_douban
       @consumer = OAuth::Consumer.new(
-        DOUBAN_API_KEY, 
-        DOUBAN_API_KEY_SECRET, 
-        { 
+        DOUBAN_API_KEY,
+        DOUBAN_API_KEY_SECRET,
+        {
           :site=>"http://www.douban.com",
           :request_token_path=>"/service/auth/request_token",
           :access_token_path=>"/service/auth/access_token",
@@ -118,5 +118,5 @@ class SessionsController < ApplicationController
       flash[:request_token] = @request_token
       redirect_to @request_token.authorize_url + "&oauth_callback=#{douban_login_sessions_url}"
     end
-  
+
 end

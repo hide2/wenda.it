@@ -2,26 +2,26 @@ class QuestionsController < ApplicationController
 
   before_filter :login_required, :only => [:edit, :update]
   before_filter :validate_question, :only => [:create, :update]
-  
+
   def index
     @questions = Question.paginate(params[:page] || 1)
     @youareat = "questions"
   end
-  
+
   def unanswered
     @questions = Question.unanswered(params[:page] || 1)
     @youareat = "unanswered"
   end
-  
+
   def answered
     @questions = Question.answered(params[:page] || 1)
   end
-  
+
   def tagged
     @tag = Tag.find_by_name(params[:tag])
     @questions = @tag.nil? ? [] : Question.tagged(@tag.name)
   end
-  
+
   def search
     @questions = Question.search(params[:q], params[:page] || 1)
   end
@@ -35,7 +35,7 @@ class QuestionsController < ApplicationController
     @meta = @question.title
     @keywords = @question.tags.map{|t|t["name"]}.join(' ')
   end
-  
+
   def vote
     if !login?
       render :text => "failed:请先登录再进行投票！"
@@ -55,16 +55,16 @@ class QuestionsController < ApplicationController
     @question.save
     render :text => "success:" + @question.votes_count.to_s
   end
-  
+
   def preview
     render :text => RDiscount.new(params[:data]).to_html
   end
-  
+
   def new
     @question = Question.new
     @youareat = "new_question"
   end
-  
+
   def edit
     @question = Question.find(params[:id])
     if current_user.id != @question.user_id
@@ -72,7 +72,7 @@ class QuestionsController < ApplicationController
       render 'welcome/422'
     end
   end
-  
+
   def create
     @question = Question.new
     @question.title = params[:question][:title].strip
@@ -94,7 +94,7 @@ class QuestionsController < ApplicationController
       render :action => "new"
     end
   end
-  
+
   def update
     @question = Question.find(params[:id])
     raise "Wrong operation: update question #{@question.id} with user #{current_user.id}" if current_user.id != @question.user_id
@@ -109,9 +109,9 @@ class QuestionsController < ApplicationController
       render :action => "edit"
     end
   end
-  
+
   private
-  
+
     def validate_question
       params[:tags].gsub!("请使用空格或逗号分隔多个标签", "")
       params[:tags].strip!
@@ -147,5 +147,5 @@ class QuestionsController < ApplicationController
         end
       end
     end
-  
+
 end

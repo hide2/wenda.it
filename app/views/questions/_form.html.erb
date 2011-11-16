@@ -33,7 +33,7 @@ $(document).ready(function() {
 
 <div class="form-item">
 	<label>标签</label>
-	<input type="text" onfocus="if (this.value=='请使用空格或逗号分隔多个标签') this.value = ''" onblur="if (this.value=='') this.value = '请使用空格或逗号分隔多个标签'" tabindex="103" value="<%= @question.tags.blank? ? '请使用空格或逗号分隔多个标签' : @question.tags[0].is_a?(Hash) ? @question.tags.map{|t|t["name"]}.join(' ') : @question.tags %>" size="60" maxlength="60" name="tags" id="tags" class="edit-field-overlayed ac_input" autocomplete="off">		
+	<input type="text" onfocus="if (this.value=='请使用空格或逗号分隔多个标签') this.value = ''" onblur="if (this.value=='') this.value = '请使用空格或逗号分隔多个标签'" tabindex="103" value="<%= @question.tags.blank? ? '请使用空格或逗号分隔多个标签' : @question.tags[0].is_a?(Hash) ? @question.tags.map{|t|t["name"]}.join(' ') : @question.tags %>" size="60" maxlength="60" name="tags" id="tags" class="edit-field-overlayed ac_input" autocomplete="off">
 </div>
 
 <% if @question.new? && !login? %>

@@ -4,18 +4,18 @@ class UsersController < ApplicationController
     @users = User.paginate(params[:page] || 1)
     @youareat = "users"
   end
-  
+
   def search
     @users = User.search(params[:keyword])
     render :layout => false
   end
-  
+
   def show
     @user = User.find params[:id]
     @user.views_count += 1
     @user.save
   end
-  
+
   def signup
     if login? && current_user.crypted_password.nil?
       @user = current_user
@@ -26,12 +26,12 @@ class UsersController < ApplicationController
     end
     @prev_action = "signup"
   end
-  
+
   def edit
     @user = current_user
     @prev_action = "edit"
   end
-  
+
   def create
     validate_new_user
     if @errors.empty?
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
       render :action => "signup"
     end
   end
-  
+
   def update
     validate_update_user
     if @errors.empty?
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
       render :action => @prev_action
     end
   end
-  
+
   def login
     if request.post?
       validate_login
@@ -71,14 +71,14 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
   def logout
     session[:user_id] = nil
     redirect_to root_path
   end
-  
+
   private
-  
+
     def validate_new_user
       @errors = []
       @user = User.new
@@ -105,7 +105,7 @@ class UsersController < ApplicationController
         @errors << "该Email已经被占用"
       end
     end
-  
+
     def validate_update_user
       @errors = []
       @user = current_user
@@ -138,7 +138,7 @@ class UsersController < ApplicationController
         @errors << "该Email已经被占用"
       end
     end
-  
+
     def validate_login
       @errors = []
       if params[:username].blank?
@@ -159,5 +159,5 @@ class UsersController < ApplicationController
         end
       end
     end
-  
+
 end

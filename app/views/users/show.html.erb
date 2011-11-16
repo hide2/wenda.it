@@ -46,12 +46,12 @@
 	<div class="subheader">
 		<h1>统计</h1>
 	</div>
-	
+
 	<div id="questions-table" class="user-stats-table">
 		<table style="width: 100%;" class="summary-title">
 			<tr>
 				<td>
-					<span class="summarycount ar"><%=@user.questions_count%></span>								 
+					<span class="summarycount ar"><%=@user.questions_count%></span>
 				</td>
 				<td class="summary-header">
 					<span style="font-size: 200%">问题</span>
@@ -80,7 +80,7 @@
 				<h3><a href="/questions/<%=q.id%>" class="question-hyperlink" title="<%=q.content%>" target="_blank"><%=q.title%></a></h3>
 				<div class="tags">
 					<% q.tags.each do |t| %>
-					<a rel="tag" title="查看含有标签 '<%=t['name']%>' 的问题" class="post-tag" href="/questions/tagged/<%=u t['name']%>"><%=t['name']%></a> 
+					<a rel="tag" title="查看含有标签 '<%=t['name']%>' 的问题" class="post-tag" href="/questions/tagged/<%=u t['name']%>"><%=t['name']%></a>
 					<% end %>
 				</div>
 				<div class="started">
@@ -96,7 +96,7 @@
 		<table class="summary-title" style="width: 100%;">
 			<tr>
 				<td>
-					<span class="summarycount ar"><%=@user.answers_count%></span>								 
+					<span class="summarycount ar"><%=@user.answers_count%></span>
 				</td>
 				<td class="summary-header">
 					<span style="font-size: 200%">回答</span>
@@ -117,7 +117,7 @@
 		<table class="summary-title" style="width: 100%;">
 			<tr>
 				<td>
-					<span class="summarycount ar"><%=@user.comments_count%></span>								 
+					<span class="summarycount ar"><%=@user.comments_count%></span>
 				</td>
 				<td class="summary-header">
 					<span style="font-size: 200%">评论</span>
@@ -137,7 +137,7 @@
 		<table class="summary-title" style="width: 100%;">
 			<tr>
 				<td>
-					<span class="summarycount ar"><%=@user.tags_count%></span>								 
+					<span class="summarycount ar"><%=@user.tags_count%></span>
 				</td>
 				<td class="summary-header">
 					<span style="font-size: 200%">标签</span>

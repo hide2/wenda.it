@@ -1,12 +1,12 @@
 class CommentsController < ApplicationController
 
   before_filter :validate_comment, :only => [:create]
-  
+
   def new
     @answer = Answer.find(params[:answer_id])
     @comment = Comment.new
   end
-  
+
   def create
     @answer = Answer.find(params[:comment][:answer_id])
     @comment = Comment.new
@@ -25,9 +25,9 @@ class CommentsController < ApplicationController
       render :action => "new"
     end
   end
-  
+
   private
-  
+
     def validate_comment
       @errors = []
       if params[:comment][:content].blank?
@@ -55,5 +55,5 @@ class CommentsController < ApplicationController
         end
       end
     end
-  
+
 end
